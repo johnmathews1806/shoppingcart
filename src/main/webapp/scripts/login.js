@@ -1,4 +1,4 @@
-var app = angular.module('shoppingcart',['ngRoute']);
+var app = angular.module('login',['ngRoute']);
 
 app.config(function($routeProvider) {
     $routeProvider    
@@ -13,3 +13,6 @@ app.config(function($routeProvider) {
     });
     
 });
+
+    
+    

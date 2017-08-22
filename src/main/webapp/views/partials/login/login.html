@@ -1,0 +1,21 @@
+	<form name="loginForm">
+		<div class="container">
+			<div class="jumbotron">
+				<p>{{message}}</p>
+				<p>
+					User Name: <input type="text" ng-model="firstName" required>
+				</p>
+				<p>
+					Password: <input type="password" ng-model="password" required>
+				</p>
+
+				<button type="button" class="btn btn-success"
+					ng-disabled="loginForm.$invalid" ng-click="login();">Submit</button>
+					
+				<ul>
+					<li ng-repeat="x in response">{{ x.name + ', ' + x.password }}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>

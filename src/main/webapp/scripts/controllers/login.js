@@ -16,7 +16,8 @@ app.controller('loginCtrl', function($scope,$http) {
 				//alert("entered name: "+$scope.userid);
 				//alert("entered password: "+$scope.password);
 				//alert($scope.password==$scope.userList[count].password);
-				if($scope.password==$scope.userList[count].password && $scope.userid==$scope.userList[count].name){
+				if($scope.password==$scope.userList[count].password && 
+						angular.lowercase($scope.userid)==angular.lowercase($scope.userList[count].name)){
 					//alert("validated");
 					validUser = true;
 					break;					
@@ -26,10 +27,10 @@ app.controller('loginCtrl', function($scope,$http) {
 			//alert(validUser);
 			if(validUser==true){
 				//alert("in true");
-				window.location = 'views/partials/home/home.html';
+				window.location = 'app.html';
 			}else{
 				//alert("in false");
-				window.location = 'index.html';
+				//window.location = 'index.html';
 			}
 			//
 		}, function(response) {

@@ -1,15 +1,30 @@
 var app = angular.module('shoppingcart',['ngRoute']);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider) {	
     $routeProvider    
-    .when("/login", {
-        templateUrl : 'views/partials/login/login.html',
-        controller : "loginCtrl"
+    .when("/home", {
+        templateUrl : 'views/partials/home/home.html',
+        controller : "navCtrl"
     })
-    .when("/aboutUs", {
-        templateUrl : 'views/partials/login/aboutUs.html'
+    .when("/menu1", {
+        templateUrl : 'views/partials/menu1.html'
+    })
+    .when("/menu2", {
+        templateUrl : 'views/partials/menu1.html'
+    })
+    .when("/menu3", {
+        templateUrl : 'views/partials/menu1.html'
+    })
+    .when("/menu4", {
+        templateUrl : 'views/partials/menu1.html'
+    })
+    .when("/menu5", {
+        templateUrl : 'views/partials/menu1.html'
+    })
+    .when("/menu6", {
+        templateUrl : 'views/partials/menu1.html'
     }).otherwise({
-        redirectTo: '/login'
+        redirectTo: '/home'
     });
     
 });

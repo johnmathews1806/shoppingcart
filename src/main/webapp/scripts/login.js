@@ -1,4 +1,8 @@
-var app = angular.module('login',['ngRoute']);
+angular.module('Authentication', []);
+var app = angular.module('login',[
+                                  'ngRoute',
+                                  'Authentication'
+                                  ]);
 
 app.config(function($routeProvider) {
     $routeProvider    

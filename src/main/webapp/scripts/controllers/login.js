@@ -1,3 +1,4 @@
+
 app.controller('loginCtrl', function($scope,$http,Authentication) {	
 
 	$scope.login = function() {
@@ -11,6 +12,7 @@ app.controller('loginCtrl', function($scope,$http,Authentication) {
 			}else{
 				$scope.message = status.message;
 			}
+
 		});		
 	}
 });
@@ -67,4 +69,3 @@ app.controller('loginCtrl', function($scope,$http,Authentication) {
     }
 });
 */
-

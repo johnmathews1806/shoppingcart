@@ -1,7 +1,7 @@
 	<form name="loginForm">
 		<div class="container">
 			<div class="jumbotron">
-				<p>{{message}}</p>
+				<div ng-show="message" class="alert alert-danger">{{message}}</div>				
 				<p>{{hex}}</p>
 				<p>
 					User Name: <input type="text" ng-model="userid" required>

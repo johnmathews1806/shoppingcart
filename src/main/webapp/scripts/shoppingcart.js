@@ -3,7 +3,7 @@ var app = angular.module('shoppingcart',['ngRoute']);
 app.config(function($routeProvider) {	
     $routeProvider    
     .when("/home", {
-        templateUrl : 'views/partials/home/home.html',
+        templateUrl : 'home/home.html',
         controller : "navCtrl"
     })
     .when("/menu1", {

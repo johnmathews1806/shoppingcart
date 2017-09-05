@@ -1,17 +1,22 @@
 angular.module('Authentication', []);
 var app = angular.module('login',[
                                   'ngRoute',
-                                  'Authentication'
+                                  'ngCookies',
+                                  'Authentication'                                  
                                   ]);
 
 app.config(function($routeProvider) {
     $routeProvider    
     .when("/login", {
-        templateUrl : 'views/partials/login/login.html',
+        templateUrl : 'login/login.html',
         controller : "loginCtrl"
     })
+    .when("/app", {
+        templateUrl : 'app.html',
+        controller : "navCtrl"
+    })
     .when("/aboutUs", {
-        templateUrl : 'views/partials/login/aboutUs.html'
+        templateUrl : 'aboutUs.html'
     }).otherwise({
         redirectTo: '/login'
     });

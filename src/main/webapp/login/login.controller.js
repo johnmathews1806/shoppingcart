@@ -1,23 +1,25 @@
 
-app.controller('loginCtrl', function($scope,$http,Authentication) {	
+app.controller('loginCtrl', function($scope,$http,$location,AuthenticationService) {	
 
 	$scope.login = function() {
-		alert("in login");
-		Authentication.Login($scope.userid, $scope.password,function(status){
-			//alert("in callback2");
+		//alert("in login");
+		AuthenticationService.Login($scope.userid, $scope.password,function(status){
+			alert("in callback2");
 			//alert(status.valid);
 			//alert(status.message);
 			if(status.valid){
-				window.location = 'app.html';
+				AuthenticationService.SetCredentials($scope.userid, $scope.password);
+				//window.location = 'app.html';
+				$location.path('/app');
 			}else{
 				$scope.message = status.message;
 			}
 
 		});		
-	}
+	};
 });
 /*
-.service('Authentication', function($http) {
+.service('AuthenticationService', function($http) {
     this.myFunc = function (x) {
         return x.toString(16);
     }

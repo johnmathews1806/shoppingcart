@@ -52,7 +52,13 @@ angular.module('login')
 
         	//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
         	$cookies.put('globals', $rootScope.globals);
-    	}    
+    	}  ,
+    	
+    	 ClearCredentials : function () {			
+            $rootScope.globals = {};
+            $cookies.remove('globals');
+            //$http.defaults.headers.common.Authorization = 'Basic ';
+        }
     }
 }]);
 

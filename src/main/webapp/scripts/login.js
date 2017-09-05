@@ -11,10 +11,10 @@ app.config(function($routeProvider) {
         templateUrl : 'login/login.html',
         controller : "loginCtrl"
     })
-    .when("/app", {
-        templateUrl : 'app.html',
-        controller : "navCtrl"
-    })
+    //.when("/app", {
+      //  templateUrl : 'app.html',
+        //controller : "navCtrl"
+    //})
     .when("/aboutUs", {
         templateUrl : 'aboutUs.html'
     }).otherwise({

@@ -9,8 +9,9 @@ app.controller('loginCtrl', function($scope,$http,$location,AuthenticationServic
 			//alert(status.message);
 			if(status.valid){
 				AuthenticationService.SetCredentials($scope.userid, $scope.password);
-				//window.location = 'app.html';
-				$location.path('/app');
+				window.location = 'app.html';
+				//$location.path('/app.html');
+				//$location.url('app.html');
 			}else{
 				$scope.message = status.message;
 			}

@@ -4,7 +4,7 @@ app.config(function($routeProvider) {
     $routeProvider    
     .when("/home", {
         templateUrl : 'home/home.html',
-        controller : "navCtrl"
+        controller : "homeCtrl"
     })
     .when("/menu1", {
         templateUrl : 'views/partials/menu1.html'

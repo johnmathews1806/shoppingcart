@@ -1,8 +1,9 @@
-app.controller('homeCtrl', function($scope,$http,$rootScope) {	
+app.controller('homeCtrl', function($scope,$rootScope) {	
 
 
 		
-				$scope.response = $rootScope.response;
+				$scope.creds = $rootScope.globals;
+				$scope.message = 'Text put here';
 				
 
 });

@@ -17,7 +17,26 @@ input.ng-invalid {
 
 <body>
 
-	<div ng-view></div>
+<table border="1">
+<tr align="right"><a href="#logout">Logout</a>
+</form></tr>
+	<tr>
+		<td>Menu
+			<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="#menu1">menu1</a></li>
+			<li><a href="#menu2">menu2</a></li>
+			<li><a href="#menu3">menu3</a></li>
+			<li><a href="#menu4">menu4</a></li>
+			<li><a href="#menu5">menu5</a></li>
+			</ul>
+		</td>
+		<td><div ng-view></div>
+			
+		</td>
+	<tr>
+</table>
+	
 
 <a href="#aboutUs">About</a>
 <ul>
@@ -44,6 +63,8 @@ Step5:{{userList}}
 	<script src="scripts/login.js"></script>
 	<script src="login/login.controller.js"></script>
 	<script src="login/login.service.js"></script>
+	<script src="home/home.controller.js"></script>
+	<script src="logout/logout.controller.js"></script>
 
 </body>
 </html>

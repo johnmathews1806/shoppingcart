@@ -1,5 +1,5 @@
 //alert("authentication service started");
-angular.module('login')
+angular.module('Authentication')
 
 .factory('AuthenticationService', ['$http','$rootScope','$cookies',function($http,$rootScope,$cookies) {
     return{
@@ -42,13 +42,14 @@ angular.module('login')
     	
     	SetCredentials : function (userid,password) {
     		var authdata = userid + ':' + password;
-
+    		alert(authdata);
     		$rootScope.globals = {
     			currentUser: {
     				userid: userid,
     				authdata: authdata
     			}
         	};
+    		alert($rootScope.globals.currentUser.userid);
 
         	//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
         	$cookies.put('globals', $rootScope.globals);
@@ -57,8 +58,9 @@ angular.module('login')
     	 ClearCredentials : function () {			
             $rootScope.globals = {};
             $cookies.remove('globals');
-            //$http.defaults.headers.common.Authorization = 'Basic ';
-        }
+            //$http.defaults.headers.common.Authorization = 'Basic ';            
+        }  	
+
     }
 }]);
 

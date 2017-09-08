@@ -1,22 +1,29 @@
-
-app.controller('loginCtrl', function($scope,$http,$location,AuthenticationService) {	
+angular.module('Authentication')
+.controller('loginCtrl', function($scope,$http,$location,AuthenticationService) {	
 
 	$scope.login = function() {
 		//alert("in login");
 		AuthenticationService.Login($scope.userid, $scope.password,function(status){
-			alert("in callback2");
+			//alert("in callback2");
 			//alert(status.valid);
 			//alert(status.message);
 			if(status.valid){
+				alert('calling SetCredentials...');
 				AuthenticationService.SetCredentials($scope.userid, $scope.password);
-				window.location = 'app.html';
-				//$location.path('/app.html');
+				//window.location = 'app.html';
+				$location.path('/home');
 				//$location.url('app.html');
 			}else{
 				$scope.message = status.message;
 			}
 
 		});		
+	};
+	
+	$scope.logout = function(){
+		alert('calling logout...');
+		AuthenticationService.ClearCredentials();
+		$location.path('/login');
 	};
 });
 /*

@@ -2,8 +2,9 @@ angular.module('Logout')
 .controller('logoutCtrl', function($scope,$location,AuthenticationService) {
 	
 	
-		alert('calling logout...');
+		//alert('calling logout...');
 		AuthenticationService.ClearCredentials();
-		$location.path('/login');
+		//$location.path('/login');
+		window.location = 'index.html';
 	
 });

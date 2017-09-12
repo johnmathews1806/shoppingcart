@@ -1,14 +1,25 @@
 
 <!doctype html>
-<html ng-app="login" >
+<html ng-app="login">
 <head>
 <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link rel="stylesheet" 
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 input.ng-invalid {
 	background-color: lightblue;
+}
+.green-background {
+  background-color: green;
+}
+div1 {
+	background-color: yellow;
+	border-color: green;
+    border-width: 2px;
+    border-style: solid;
 }
 </style>
 
@@ -17,35 +28,15 @@ input.ng-invalid {
 
 <body>
 
-<table border="1">
-<tr align="right"><a href="#logout">Logout</a>
-</form></tr>
-	<tr>
-		<td>Menu
-			<ul>
-			<li><a href="#home">Home</a></li>
-			<li><a href="#menu1">menu1</a></li>
-			<li><a href="#menu2">menu2</a></li>
-			<li><a href="#menu3">menu3</a></li>
-			<li><a href="#menu4">menu4</a></li>
-			<li><a href="#menu5">menu5</a></li>
-			</ul>
-		</td>
-		<td><div ng-view></div>
-			
-		</td>
-	<tr>
-</table>
-	
+	<div class="container-fluid">		 
+		<div class="row">
+			<div class="col-sm-4"></div>
+			<!-- Below div to take up col-sm-8 --> 			
+			<div ng-view></div>			
+		</div>
+	</div>
 
-<a href="#aboutUs">About</a>
-<ul>
-  <li ng-repeat="x in userList">
-    {{ x.name + ', ' + x.password }}
-  </li>
-</ul>
-
-Step5:{{userList}}
+	<a href="#aboutUs">About</a>	
 
 
 	<script
@@ -53,19 +44,25 @@ Step5:{{userList}}
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
-	<script src="https://code.angularjs.org/1.5.5/angular-cookies.js"></script>
-	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
+
 	<!-- Application scripts -->
 	<script src="scripts/login.js"></script>
 	<script src="login/login.controller.js"></script>
 	<script src="login/login.service.js"></script>
-	<script src="home/home.controller.js"></script>
+	
+	<!-- when using index.html for the entire app use these scripts-->
+	<!--  
+	 <script src="home/home.controller.js"></script>
 	<script src="logout/logout.controller.js"></script>
+	 -->
 
 </body>
 </html>
-	
+

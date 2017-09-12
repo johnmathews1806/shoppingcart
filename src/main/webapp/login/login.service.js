@@ -1,7 +1,8 @@
 //alert("authentication service started");
 angular.module('Authentication')
 
-.factory('AuthenticationService', ['$http','$rootScope','$cookies',function($http,$rootScope,$cookies) {
+.factory('AuthenticationService', ['$http','$rootScope','$cookieStore','$window',
+		function($http,$rootScope,$cookieStore,$window) {
     return{
     
     	Login : function(userid,password,callback){
@@ -42,22 +43,28 @@ angular.module('Authentication')
     	
     	SetCredentials : function (userid,password) {
     		var authdata = userid + ':' + password;
-    		alert(authdata);
+    		//alert(authdata);
     		$rootScope.globals = {
     			currentUser: {
     				userid: userid,
     				authdata: authdata
     			}
         	};
-    		alert($rootScope.globals.currentUser.userid);
+    		//alert('cookie is set');
+    		//alert($rootScope.globals.currentUser.userid);
 
         	//$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-        	$cookies.put('globals', $rootScope.globals);
+    		//alert('setting '+$rootScope.globals.currentUser.userid);
+    		//$cookieStore.put('globals1', $rootScope.globals);  
+    		//$window.localStorage.setItem('globals1',JSON.stringify($rootScope.globals));
+    		$window.sessionStorage.setItem('globals1',JSON.stringify($rootScope.globals));
     	}  ,
     	
     	 ClearCredentials : function () {			
             $rootScope.globals = {};
-            $cookies.remove('globals');
+            //$cookieStore.remove('globals');
+            //$window.localStorage.removeItem('globals1');
+            $window.sessionStorage.removeItem('globals1');
             //$http.defaults.headers.common.Authorization = 'Basic ';            
         }  	
 

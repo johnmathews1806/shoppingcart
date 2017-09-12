@@ -3,28 +3,26 @@ angular.module('Authentication')
 
 	$scope.login = function() {
 		//alert("in login");
+		$scope.error = false;
+		$scope.dataLoading = true;
 		AuthenticationService.Login($scope.userid, $scope.password,function(status){
 			//alert("in callback2");
 			//alert(status.valid);
 			//alert(status.message);
 			if(status.valid){
-				alert('calling SetCredentials...');
+				//alert('calling SetCredentials...');
 				AuthenticationService.SetCredentials($scope.userid, $scope.password);
-				//window.location = 'app.html';
-				$location.path('/home');
+				window.location = 'app.html'; // when loading a separate page altogether for the app
+				//$location.path('/home'); // when using index.html and replacing partials for the app
 				//$location.url('app.html');
 			}else{
-				$scope.message = status.message;
+				$scope.error = status.message;
+				$scope.dataLoading = false;
 			}
 
 		});		
 	};
-	
-	$scope.logout = function(){
-		alert('calling logout...');
-		AuthenticationService.ClearCredentials();
-		$location.path('/login');
-	};
+
 });
 /*
 .service('AuthenticationService', function($http) {

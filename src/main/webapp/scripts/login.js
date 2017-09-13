@@ -1,14 +1,10 @@
 //Module declaration
 angular.module('Authentication', []);
-angular.module('Home', ['ngCookies']);
-angular.module('Logout', []);
 
 angular.module('login',[
                                   'ngRoute',
                                   'ngCookies',
-                                  'Authentication',
-                                  'Home',
-                                  'Logout'
+                                  'Authentication'                                  
                                   ])
 
 .config(function($routeProvider) {	
@@ -16,19 +12,6 @@ angular.module('login',[
     .when("/login", {
         templateUrl : 'login/login.html',
         controller : "loginCtrl"
-    })
-    .when("/home", {
-        templateUrl : 'home/home.html',
-        controller : "homeCtrl"
-    })
-    .when("/menu1", {
-        templateUrl : 'views/partials/menu1.html'
-    })
-    .when("/menu2", {
-        templateUrl : 'views/partials/menu1.html'
-    })
-    .when("/menu3", {
-        templateUrl : 'views/partials/menu1.html'
     })
     .when("/aboutUs", {
         templateUrl : 'aboutUs.html'

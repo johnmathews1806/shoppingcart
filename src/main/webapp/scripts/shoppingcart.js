@@ -1,18 +1,20 @@
 //Module declaration
 angular.module('Authentication', []);
+angular.module('Home', []);
 angular.module('Logout', []);
 var app = angular.module('shoppingcart',[
 										'ngRoute',
 										'ngCookies',
-										'Authentication',										
+										'Authentication',		
+										'Home',
 										'Logout'
 										]);
 
 app.config(function($routeProvider) {	
     $routeProvider    
     .when("/home", {
-        templateUrl : 'home/home.html'
-        
+        templateUrl : 'home/home.html',
+        controller : "homeCtrl"
     })
     .when("/menu1", {
         templateUrl : 'views/partials/menu1.html'

@@ -1,0 +1,26 @@
+<h3> Orders </h3> 
+
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
+
+<form name="orderForm" ng-submit="deleteOrder()" role="form">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Order Id</th>
+				<th>Products</th>				
+			</tr>
+		</thead>
+		<tbody>		
+			<tr ng-repeat="order in orders">
+				<td><input type="radio" ng-model="$parent.selectedOrder" ng-value="order.id" ></td>
+				<td>{{order.id}}</td>
+				<td><ul ng-repeat="item in order.order">
+				<li>{{item.product_name}}</li>
+				</ul></td>				
+			</tr>
+		</tbody>
+	</table>
+<button type="submit" ng-disabled="dataLoading" class="btn btn-success">Delete Order</button>
+</form>

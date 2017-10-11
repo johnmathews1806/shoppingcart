@@ -1,0 +1,31 @@
+<h3>Products</h3>
+
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
+
+<form name="productForm" ng-submit="order()" role="form">
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Product Name</th>
+				<th>Desciption</th>
+				<th>Price</th>
+				<th>Launch Date</th>
+				<th>Manufacturer</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="p in products">
+				<td><input type="checkbox" id="{{p.id}}" ng-model="p.selected" ></td>
+				<td>{{p.product_name}}</td>
+				<td>{{p.description}}</td>
+				<td>{{p.price}}</td>
+				<td>{{p.create_date}}</td>
+				<td>{{p.create_user}}</td>
+			</tr>
+		</tbody>
+	</table>
+<button type="submit" ng-disabled="dataLoading" class="btn btn-success">Place Order</button>
+
+</form>

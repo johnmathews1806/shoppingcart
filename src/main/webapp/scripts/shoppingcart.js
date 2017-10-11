@@ -1,12 +1,16 @@
 //Module declaration
 angular.module('Authentication', []);
 angular.module('Home', []);
+angular.module('Products', []);
+angular.module('Orders', []);
 angular.module('Logout', []);
 var app = angular.module('shoppingcart',[
 										'ngRoute',
 										'ngCookies',
 										'Authentication',		
 										'Home',
+										'Products',
+										'Orders',
 										'Logout'
 										]);
 
@@ -16,24 +20,23 @@ app.config(function($routeProvider) {
         templateUrl : 'home/home.html',
         controller : "homeCtrl"
     })
-    .when("/menu1", {
-        templateUrl : 'views/partials/menu1.html'
+    .when("/products", {
+        templateUrl : 'products/products.html',
+        controller : "productsCtrl"
     })
-    .when("/menu2", {
-        templateUrl : 'views/partials/menu1.html'
+    .when("/orders", {
+        templateUrl : 'orders/orders.html',
+        controller : "ordersCtrl"
     })
     .when("/menu3", {
-        templateUrl : 'views/partials/menu1.html'
+        templateUrl : 'menu3/menu3.html'
     })
     .when("/menu4", {
-        templateUrl : 'views/partials/menu1.html'
+        templateUrl : 'menu4/menu4.html'
     })
     .when("/menu5", {
-        templateUrl : 'views/partials/menu1.html'
-    })
-    .when("/menu6", {
-        templateUrl : 'views/partials/menu1.html'
-    })
+        templateUrl : 'menu5/menu5.html'
+    })    
     .when("/logout", {
         templateUrl : 'logout/logout.html',
         controller : "logoutCtrl"

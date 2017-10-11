@@ -2,7 +2,7 @@
 angular.module('Authentication', []);
 angular.module('Home', []);
 angular.module('Products', []);
-angular.module('Orders', []);
+angular.module('Orders', ['ngRoute']);
 angular.module('Logout', []);
 var app = angular.module('shoppingcart',[
 										'ngRoute',

@@ -1,5 +1,5 @@
 angular.module('Orders')
-.controller('ordersCtrl', function($scope,$http) {	
+.controller('ordersCtrl', function($scope,$http,$route) {	
 
 	//alert("started orders controller");
 	
@@ -19,9 +19,10 @@ angular.module('Orders')
 		
 		$http.delete("http://localhost:3000/orders/"+$scope.selectedOrder,"")
 		.then(function(response){
-				$location.path('/orders');
-			  	alert("success"+response.status);
-			  	alert("success"+response.statusText);
+				//$location.path('/orders');
+				$route.reload();
+			  	//alert("success"+response.status);
+			  	//alert("success"+response.statusText);
 			   }, 
 			   function(response){
 				   alert("failure"+response.status);

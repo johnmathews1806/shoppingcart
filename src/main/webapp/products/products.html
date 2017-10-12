@@ -6,8 +6,7 @@
 
 	<table class="table table-striped">
 		<thead>
-			<tr>
-				<th></th>
+			<tr>				
 				<th>Product Name</th>
 				<th>Desciption</th>
 				<th>Price</th>
@@ -16,16 +15,54 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="p in products">
-				<td><input type="checkbox" id="{{p.id}}" ng-model="p.selected" ></td>
+			<tr ng-repeat="p in products">				
 				<td>{{p.product_name}}</td>
 				<td>{{p.description}}</td>
 				<td>{{p.price}}</td>
 				<td>{{p.create_date}}</td>
 				<td>{{p.create_user}}</td>
+				<td><select ng-model="p.numberOfItems" ng-init="p.numberOfItems = p.numberOfItems || 1"
+					ng-options="x for x in Range(1,20)">Quantity
+				</select></td>
+				<td><button type="button"
+						ng-click="addToCart(p.product_name,p.price,p.numberOfItems)" class="btn btn-primary">Add
+						to Cart</button></td>
 			</tr>
 		</tbody>
 	</table>
-<button type="submit" ng-disabled="dataLoading" class="btn btn-success">Place Order</button>
+
+	<div class="col-sm-6"></div>
+	<div class="col-sm-6">
+		<div class="panel panel-info" ng-show="cart">
+			<div class="panel-heading">Order Summary</div>
+			<div class="panel-body">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Product Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in cart">
+							<td>{{item.product_name}}</td>							
+							<td>{{item.quantity}}</td>
+							<td>{{item.price}}</td>
+							<td>{{item.price*item.quantity}}</td>
+						</tr>
+						<tr><td colspan="3"><b>Grand Total: </b></td><td>{{grandTotal}}</td></tr>
+				</table>
+			</div>
+			<div class="panel-footer">
+			<button type="submit" ng-disabled="dataLoading" class="btn btn-success">Place
+		Order</button>
+			</div>
+		</div>
+	</div>
+
+
+
 
 </form>

@@ -1,0 +1,113 @@
+{
+  "products": [
+    {
+      "id": 101,
+      "product_name": "One",
+      "description": "Smart Phone",
+      "price": 36500,
+      "create_date": "01-03-2017",
+      "create_user": "HTC"
+    },
+    {
+      "id": 102,
+      "product_name": "Galaxy S8",
+      "description": "Smart Phone",
+      "price": 45000,
+      "create_date": "06-04-2017",
+      "create_user": "Samsung"
+    },
+    {
+      "id": 103,
+      "product_name": "Iphone",
+      "description": "Smart Phone",
+      "price": 68000,
+      "create_date": "06-04-2017",
+      "create_user": "Apple"
+    },
+    {
+      "id": 104,
+      "product_name": "Nexus 7",
+      "description": "Smart Phone",
+      "price": 53000,
+      "create_date": "06-04-2017",
+      "create_user": "Google"
+    }
+  ],
+  "orders": [
+    {
+      "id": 5698,
+      "order": [
+        {
+          "product_name": "One",
+          "price": 36500,
+          "quantity": 1
+        },
+        {
+          "product_name": "Galaxy S8",
+          "price": 45000,
+          "quantity": 1
+        },
+        {
+          "product_name": "Iphone",
+          "price": 68000,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 6343,
+      "order": [
+        {
+          "product_name": "Galaxy S8",
+          "price": 45000,
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "id": 7530,
+      "order": [
+        {
+          "product_name": "One",
+          "price": 36500,
+          "quantity": 9
+        },
+        {
+          "product_name": "Iphone",
+          "price": 68000,
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "id": 768,
+      "order": [
+        {
+          "product_name": "One",
+          "price": 36500,
+          "quantity": 1
+        },
+        {
+          "product_name": "Galaxy S8",
+          "price": 45000,
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "id": 4860,
+      "order": [
+        {
+          "product_name": "One",
+          "price": 36500,
+          "quantity": 4
+        },
+        {
+          "product_name": "Galaxy S8",
+          "price": 45000,
+          "quantity": 6
+        }
+      ]
+    }
+  ]
+}

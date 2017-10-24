@@ -10,26 +10,32 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jm.shoppingcart.entities.Order;
 import com.jm.shoppingcart.entities.Product;
 import com.jm.shoppingcart.entities.User;
 
 @Service
+
 public class ProductService {
 	
+	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+	
+	@Transactional
 	public List<Product> getProducts(){
-		SessionFactory factory=new Configuration().configure().buildSessionFactory();  
-		Session session=factory.openSession();  
-		Transaction t=session.beginTransaction();  
+		Session session=sessionFactory.getCurrentSession();
 
 		Query query= session.createQuery("FROM Product");	
 		
-		List prod =query.list();
-		
-		t.commit();  
-		session.close();  
+		List prod =query.list();  
 		
 		return prod;
 	}

@@ -5,7 +5,8 @@ angular.module('Products')
 	
 	$scope.grandTotal = 0;
 	
-	$http.get("http://localhost:3000/products")
+	//$http.get("http://localhost:3000/products")
+	$http.get("http://localhost:9000/shoppingcart/getProducts")
 	.then(function (response) {
 		//alert("in products");
 		//alert(response.data);
@@ -15,10 +16,10 @@ angular.module('Products')
     	//alert($scope.error);    	
 	});
 	
-	$scope.addToCart = function(product_name,price,num){
+	$scope.addToCart = function(productName,price,num){
 		$scope.cart = $scope.cart || [];
-		//alert("called addToCart: "+product_name);
-		$scope.cart.push({"product_name":product_name,"price":price,"quantity":num});
+		//alert("called addToCart: "+productName);
+		$scope.cart.push({"productName":productName,"price":price,"quantity":num});
 		$scope.grandTotal = $scope.grandTotal + (price*num);
 		
 	}
@@ -36,7 +37,7 @@ angular.module('Products')
 		$scope.orderArray = [];
 		angular.forEach($scope.cart, function(order){
 			//alert(order.product_name);			
-			$scope.orderArray.push({"product_name":order.product_name,"price":order.price,"quantity":order.quantity});
+			$scope.orderArray.push({"productName":order.productName,"price":order.price,"quantity":order.quantity});
 		});		
 		//alert($scope.orderArray);		
 		var order_id  = Math.floor(Math.random()*10000);

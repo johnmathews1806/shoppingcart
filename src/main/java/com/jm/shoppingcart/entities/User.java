@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.OneToMany;;
 
 @Entity
@@ -22,9 +23,11 @@ public class User implements java.io.Serializable{
 	private int userId;
 		
 	@OneToMany(mappedBy="user")
+	@Transient
 	private Collection<ContactDetail> contactDetails;
 	
 	@OneToMany(mappedBy="user")
+	@Transient
 	private Collection<Order> orders;
 
 	@Column(name = "LOGIN_ID")

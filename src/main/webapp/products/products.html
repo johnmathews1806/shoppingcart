@@ -16,16 +16,16 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="p in products">				
-				<td>{{p.product_name}}</td>
+				<td>{{p.productName}}</td>
 				<td>{{p.description}}</td>
 				<td>{{p.price}}</td>
-				<td>{{p.create_date}}</td>
-				<td>{{p.create_user}}</td>
+				<td>{{p.createDate}}</td>
+				<td>{{p.createUser}}</td>
 				<td><select ng-model="p.numberOfItems" ng-init="p.numberOfItems = p.numberOfItems || 1"
 					ng-options="x for x in Range(1,20)">Quantity
 				</select></td>
 				<td><button type="button"
-						ng-click="addToCart(p.product_name,p.price,p.numberOfItems)" class="btn btn-primary">Add
+						ng-click="addToCart(p.productName,p.price,p.numberOfItems)" class="btn btn-primary">Add
 						to Cart</button></td>
 			</tr>
 		</tbody>
@@ -47,7 +47,7 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="item in cart">
-							<td>{{item.product_name}}</td>							
+							<td>{{item.productName}}</td>							
 							<td>{{item.quantity}}</td>
 							<td>{{item.price}}</td>
 							<td>{{item.price*item.quantity}}</td>

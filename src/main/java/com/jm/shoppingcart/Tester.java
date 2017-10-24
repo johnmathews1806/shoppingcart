@@ -33,30 +33,30 @@ public class Tester {
 
 	public static void main(String[] args){
 		System.out.println("In Main");
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-
-		UserService service = context.getBean(UserService.class);
-
-		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		//When Using hibernate without Spring
+/*		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
 		//Session session=factory.openSession();  
 
-		// Session session=new AnnotationConfiguration()  
-		//       .configure().buildSessionFactory().openSession();  
-
-		// 	Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-		//Transaction t=session.beginTransaction();  	
-
-		Tester tester = new Tester();
-		//tester.insertData(session);
-
-		//Order ord = new Order();
+		 Session session=new AnnotationConfiguration()  
+		       .configure().buildSessionFactory().openSession();
+*/		
+		UserService userService = context.getBean(UserService.class);
+		//UserService service = new UserService();
+		ProductService prodService = context.getBean(ProductService.class);
+		OrderService orderService = context.getBean(OrderService.class);
 		
-		// service = new UserService();
-		//ProductService service = new ProductService();
-		//Iterator m= service.getProducts().iterator();
+		Tester tester = new Tester();
+		Iterator i = prodService.getProducts().iterator();
+		while(i.hasNext()){
+			System.out.println(((Product)i.next()).getProductName());			
+		}
+				
+		tester.insertData(userService,prodService,orderService);
+
 		System.out.println("Invoking service..");
-		Iterator m= service.searchUserByName("John","X","Mathews").iterator();
+		System.out.println("User details: "+userService.getUserbyLogin("jmjohn", "asdfsadf"));
+		Iterator m= userService.searchUserByName("John","X","Mathews").iterator();
 		while(m.hasNext()){
 			//System.out.println(((Product)m.next()).getProductName());	
 			System.out.println(((User)m.next()).getLoginId());
@@ -65,7 +65,6 @@ public class Tester {
 		//t.commit();  
 		//session.close();  
 		System.out.println("successfully executed");  
-
 
 		/*EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "shoppingcart" );
 		EntityManager entitymanager = emfactory.createEntityManager( );
@@ -80,7 +79,7 @@ public class Tester {
 		context.close();
 	}
 
-	public void insertData(Session session){
+	public void insertData(UserService userService,ProductService prodService,OrderService orderService){
 		/*User user1=new User();  
 		user1.setFirstName("John");
 		user1.setMiddleName(" ");  
@@ -101,9 +100,9 @@ public class Tester {
 		prod.setUpdateDate(new Date());
 		prod.setUpdateUser("ADMIN");
 
-		session.persist(prod);
-*/
-		User user2 = (User)session.get(User.class, 1);
+		session.persist(prod);		
+*/		
+		User user2 = userService.getUserbyLoginId("jmjohn1");
 
 		/*ContactDetail ctd = new ContactDetail();
 		//ctd.setUserId(1);
@@ -132,9 +131,8 @@ public class Tester {
 		while(i.hasNext()){
 			System.out.println(((ContactDetail)i.next()).getAddress1());
 		}	 */
-/*
-		OrderService orderService = new OrderService();
-		Collection<Order> orders = orderService.getOrderbyUser(user2);
+		
+/*		Collection<Order> orders = orderService.getOrderbyUser(user2);
 
 		Iterator j = orders.iterator();
 		while(j.hasNext()){
@@ -145,10 +143,11 @@ public class Tester {
 			}		    	
 		}*/
 
-		//Product prod1 = (Product)session.get(Product.class, 1);
-		//Product prod2 = (Product)session.get(Product.class, 2);
+		
+		Product prod1 = prodService.getProducts().get(0);
+		Product prod2 = prodService.getProducts().get(1);
 
-		/*		List<OrderDetail> orders = new ArrayList<OrderDetail>();
+				List<OrderDetail> orders = new ArrayList<OrderDetail>();
 				OrderDetail ordDetails1 = new OrderDetail();			    
 				ordDetails1.setProduct(prod1);
 				ordDetails1.setQuantity(3);
@@ -162,7 +161,7 @@ public class Tester {
 				orders.add(ordDetails1);
 				orders.add(ordDetails2);
 
-				orderService.createOrder(user2, orders);*/
+				orderService.createOrder(user2, orders);
 
 	}
 }

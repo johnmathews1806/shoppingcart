@@ -2,110 +2,90 @@
   "products": [
     {
       "id": 101,
-      "product_name": "One",
+      "productName": "One",
       "description": "Smart Phone",
       "price": 36500,
-      "create_date": "01-03-2017",
-      "create_user": "HTC"
+      "createDate": "01-03-2017",
+      "createUser": "HTC"
     },
     {
       "id": 102,
-      "product_name": "Galaxy S8",
+      "productName": "Galaxy S8",
       "description": "Smart Phone",
       "price": 45000,
-      "create_date": "06-04-2017",
-      "create_user": "Samsung"
+      "createDate": "06-04-2017",
+      "createUser": "Samsung"
     },
     {
       "id": 103,
-      "product_name": "Iphone",
+      "productName": "Iphone",
       "description": "Smart Phone",
       "price": 68000,
-      "create_date": "06-04-2017",
-      "create_user": "Apple"
+      "createDate": "06-04-2017",
+      "createUser": "Apple"
     },
     {
       "id": 104,
-      "product_name": "Nexus 7",
+      "productName": "Nexus 7",
       "description": "Smart Phone",
       "price": 53000,
-      "create_date": "06-04-2017",
-      "create_user": "Google"
+      "createDate": "06-04-2017",
+      "createUser": "Google"
     }
   ],
   "orders": [
     {
-      "id": 5698,
+      "id": 1924,
       "order": [
         {
-          "product_name": "One",
+          "productName": "One",
           "price": 36500,
           "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 5353,
+      "order": [
+        {
+          "productName": "One",
+          "price": 36500,
+          "quantity": 3
         },
         {
-          "product_name": "Galaxy S8",
+          "productName": "Galaxy S8",
           "price": 45000,
-          "quantity": 1
+          "quantity": 4
         },
         {
-          "product_name": "Iphone",
+          "productName": "Iphone",
           "price": 68000,
           "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": 6343,
-      "order": [
-        {
-          "product_name": "Galaxy S8",
-          "price": 45000,
-          "quantity": 4
-        }
-      ]
-    },
-    {
-      "id": 7530,
-      "order": [
-        {
-          "product_name": "One",
-          "price": 36500,
-          "quantity": 9
         },
         {
-          "product_name": "Iphone",
-          "price": 68000,
-          "quantity": 4
-        }
-      ]
-    },
-    {
-      "id": 768,
-      "order": [
-        {
-          "product_name": "One",
-          "price": 36500,
+          "productName": "Nexus 7",
+          "price": 53000,
           "quantity": 1
-        },
-        {
-          "product_name": "Galaxy S8",
-          "price": 45000,
-          "quantity": 5
         }
       ]
     },
     {
-      "id": 4860,
+      "id": 934,
       "order": [
         {
-          "product_name": "One",
-          "price": 36500,
-          "quantity": 4
-        },
+          "productName": "One",
+          "price": 43000,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 3711,
+      "order": [
         {
-          "product_name": "Galaxy S8",
+          "productName": "Nexus 9",
           "price": 45000,
-          "quantity": 6
+          "quantity": 1
         }
       ]
     }

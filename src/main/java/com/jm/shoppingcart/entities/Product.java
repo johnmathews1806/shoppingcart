@@ -38,7 +38,7 @@ public class Product implements java.io.Serializable{
 	private Date createDate;
 	
 	@Column(name = "CREATE_USER")
-	private String createuser;
+	private String createUser;
 	
 	@Column(name = "UPDATE_DATE")
 	private Date updateDate;
@@ -78,12 +78,12 @@ public class Product implements java.io.Serializable{
 		this.createDate = createDate;
 	}
 
-	public String getCreateuser() {
-		return createuser;
+	public String getCreateUser() {
+		return createUser;
 	}
 
-	public void setCreateuser(String createuser) {
-		this.createuser = createuser;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 
 	public Date getUpdateDate() {

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ORDERS")
@@ -26,12 +27,14 @@ public class Order implements java.io.Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
+	@Transient
 	private User user;
 	
 	@OneToMany(mappedBy="order")
+	@Transient
 	private Collection<OrderDetail> orderDetails;
 	
-	@Column(name = "TOTAl")
+	@Column(name = "TOTAL")
 	private BigDecimal total;
 	
 	@Column(name = "ORDER_DATE")
@@ -64,6 +67,10 @@ public class Order implements java.io.Serializable{
 	@Column(name = "ORDER_STATUS")
 	private String orderStatus;
 
+	public int getOrderId() {
+		return orderId;
+	}	
+	
 	public User getuser() { 
 		return user;
 	}
@@ -170,5 +177,6 @@ public class Order implements java.io.Serializable{
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
+
 	
 }

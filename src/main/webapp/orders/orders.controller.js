@@ -1,12 +1,12 @@
 angular.module('Orders')
-.controller('ordersCtrl', function($scope,$http,$route) {	
+.controller('ordersCtrl', function($scope,$rootScope,$http,$route) {	
 
 	//alert("started orders controller");
-	
-	$http.get("http://localhost:3000/orders")
+	$http.get("http://localhost:9000/shoppingcart/getOrders/"+$rootScope.globals.currentUser.userid)
+	//$http.get("http://localhost:3000/orders/?loginId="+$rootScope.globals.currentUser.userid)
 	.then(function (response) {
 		//alert("in orders");
-		//alert(response.data);
+		alert(JSON.stringify(response.data));
 		$scope.orders = response.data;
 	},function(response) {    		
 		$scope.error = "Host down or Network issue!";    		
@@ -15,9 +15,9 @@ angular.module('Orders')
 	
 	$scope.deleteOrder = function(){		
 		//alert("order called"+$scope.orders);		
-		//alert($scope.selectedOrder);				
+		alert($scope.selectedOrder);				
 		
-		$http.delete("http://localhost:3000/orders/"+$scope.selectedOrder,"")
+		$http.delete("http://localhost:3000/orders/"+$scope.selectedOrder)
 		.then(function(response){
 				//$location.path('/orders');
 				$route.reload();

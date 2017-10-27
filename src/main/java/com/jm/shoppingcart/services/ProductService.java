@@ -39,5 +39,17 @@ public class ProductService {
 		
 		return prod;
 	}
+	
+	@Transactional
+	public Product getProduct(int productId){
+		Session session=sessionFactory.getCurrentSession();
+
+		Query query= session.createQuery("FROM Product p where p.productId=:productId");
+		query.setParameter("productId", productId);
+		
+		Product prod =(Product)query.uniqueResult();	  
+		
+		return prod;
+	}
 
 }

@@ -7,7 +7,7 @@ angular.module('Authentication')
 
 		Login : function(userid,password,callback){
 			//alert("called Login service");		
-			alert(userid);
+			//alert(userid);
 			//alert(password);
 			var status={"valid":false,"message":""};
 			//var validUser = false;

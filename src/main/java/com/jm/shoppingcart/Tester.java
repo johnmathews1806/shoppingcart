@@ -47,20 +47,20 @@ public class Tester {
 		OrderService orderService = context.getBean(OrderService.class);
 		
 		Tester tester = new Tester();
-		Iterator i = prodService.getProducts().iterator();
+/*		Iterator i = prodService.getProducts().iterator();
 		while(i.hasNext()){
-			System.out.println(((Product)i.next()).getProductName());			
-		}
+			System.out.println(((Product)i.next()).getProductCode());			
+		}*/
 				
 		tester.insertData(userService,prodService,orderService);
 
-		System.out.println("Invoking service..");
+/*		System.out.println("Invoking service..");
 		System.out.println("User details: "+userService.getUserbyLogin("jmjohn", "asdfsadf"));
 		Iterator m= userService.searchUserByName("John","X","Mathews").iterator();
 		while(m.hasNext()){
 			//System.out.println(((Product)m.next()).getProductName());	
 			System.out.println(((User)m.next()).getLoginId());
-		}
+		}*/
 
 		//t.commit();  
 		//session.close();  
@@ -132,19 +132,19 @@ public class Tester {
 			System.out.println(((ContactDetail)i.next()).getAddress1());
 		}	 */
 		
-/*		Collection<Order> orders = orderService.getOrderbyUser(user2);
+		Collection<Order> orders = orderService.getOrderbyUser(user2);
 
-		Iterator j = orders.iterator();
+	Iterator j = orders.iterator();
 		while(j.hasNext()){
 			Collection<OrderDetail> details = ((Order)j.next()).getOrderDetails();
 			Iterator k =  details.iterator();
-			while(k.hasNext()){
-				System.out.println(((OrderDetail)k.next()).getAmount());	
-			}		    	
-		}*/
+			//while(k.hasNext()){
+				//System.out.println(((OrderDetail)k.next()).getAmount());	
+			//}		    	
+		}
 
 		
-		Product prod1 = prodService.getProducts().get(0);
+		/*Product prod1 = prodService.getProducts().get(0);
 		Product prod2 = prodService.getProducts().get(1);
 
 				List<OrderDetail> orders = new ArrayList<OrderDetail>();
@@ -161,7 +161,7 @@ public class Tester {
 				orders.add(ordDetails1);
 				orders.add(ordDetails2);
 
-				orderService.createOrder(user2, orders);
+				orderService.createOrder(user2, orders);*/
 
 	}
 }

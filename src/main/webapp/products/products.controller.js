@@ -1,5 +1,5 @@
 angular.module('Products')
-.controller('productsCtrl', function($scope,$http,$location) {	
+.controller('productsCtrl', function($scope,$rootScope,$http,$location) {	
 
 	//alert("started controller");
 	
@@ -16,10 +16,10 @@ angular.module('Products')
     	//alert($scope.error);    	
 	});
 	
-	$scope.addToCart = function(productName,price,num){
+	$scope.addToCart = function(productId,productName,price,num){
 		$scope.cart = $scope.cart || [];
 		//alert("called addToCart: "+productName);
-		$scope.cart.push({"productName":productName,"price":price,"quantity":num});
+		$scope.cart.push({"productId":productId,"productName":productName,"price":price,"quantity":num});
 		$scope.grandTotal = $scope.grandTotal + (price*num);
 		
 	}
@@ -33,20 +33,23 @@ angular.module('Products')
 	};
 	
 	$scope.order = function(){		
-		//alert("order called");
-		$scope.orderArray = [];
-		angular.forEach($scope.cart, function(order){
-			//alert(order.product_name);			
-			$scope.orderArray.push({"productName":order.productName,"price":order.price,"quantity":order.quantity});
+		//alert("order called"+$rootScope.globals.currentUser.userid);
+		//alert("cart: "+$scope.cart);
+		$scope.orderArray = [];		
+		angular.forEach($scope.cart, function(order){			
+			$scope.orderArray.push({"productId":order.productId,"productName":order.productName,"amount":order.price*order.quantity,"quantity":order.quantity});
+			alert("array");
 		});		
 		//alert($scope.orderArray);		
 		var order_id  = Math.floor(Math.random()*10000);
 		//alert(order_id);		
-		var order_object = {"id":order_id,"order":$scope.orderArray};		
-		//alert(order_object);
+		//var order_object = {"orderId":order_id,"loginId":$rootScope.globals.currentUser.userid,"orderDetail":$scope.orderArray};		
+		var order_object = {"orderDetails":$scope.orderArray};
+		alert(order_object);
 		var order = JSON.stringify(order_object);		
-		//alert(order);
-		$http.post("http://localhost:3000/orders",order)
+		alert(order);		
+		$http.post("http://localhost:9000/shoppingcart/createOrder/"+$rootScope.globals.currentUser.userid+"/"+order_id,order)
+		//$http.post("http://localhost:3000/orders",order)
 		.then(function(response){
 				//alert("success"+response.status);
 				$location.path('/orders');			  	

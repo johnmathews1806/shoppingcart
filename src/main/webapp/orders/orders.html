@@ -14,9 +14,9 @@
 		</thead>
 		<tbody>		
 			<tr ng-repeat="order in orders">
-				<td><input type="radio" ng-model="$parent.selectedOrder" ng-value="order.id" ></td>
-				<td>{{order.id}}</td>
-				<td><ul ng-repeat="item in order.order">
+				<td><input type="radio" ng-model="$parent.selectedOrder" ng-value="order.orderId" ></td>
+				<td>{{order.orderId}}</td>
+				<td><ul ng-repeat="item in order.orderDetail">
 				<li>{{item.productName}} - {{item.quantity}}</li>
 				</ul></td>				
 			</tr>

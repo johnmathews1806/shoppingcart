@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "PRODUCTS")
 public class Product implements java.io.Serializable{
@@ -24,6 +26,9 @@ public class Product implements java.io.Serializable{
 	
 	@OneToMany(mappedBy="product")
 	private Collection<OrderDetail> orderDetails;
+	
+	@Column(name = "PRODUCT_CODE")
+	private String productCode;
 	
 	@Column(name = "PRODUCT_NAME")
 	private String productName;
@@ -45,6 +50,26 @@ public class Product implements java.io.Serializable{
 	
 	@Column(name = "UPDATE_USER")
 	private String updateUser;
+	
+	@Column(name = "MANUFACTURER")
+	private String manufacturer;
+	
+	@Column(name = "LAUNCH_DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	private Date launchDate;
+	
+	
+	public int getProductId() {
+		return productId;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -100,6 +125,22 @@ public class Product implements java.io.Serializable{
 
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public Date getLaunchDate() {
+		return launchDate;
+	}
+
+	public void setLaunchDate(Date launchDate) {
+		this.launchDate = launchDate;
 	}	
 	
 }

@@ -1,0 +1,39 @@
+<h3>Profile</h3>
+
+<form name="profileForm" ng-submit="updateContact()" role="form">
+	
+	<table class="table table-striped">
+		<thead>			
+			<tr>
+				<th colspan="2">Primary Address</th>
+			</tr>
+		</thead>		
+		<tbody ng-repeat="c in contactDetails">
+			<tr>
+				<td colspan="2">Address Line 1<br> <input type="text"
+					ng-model="c.address1"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="text" ng-model="c.address2"></td>
+			</tr>
+			<tr>
+				<td><input type="text" ng-model="c.city"></td>
+				<td><input type="text" ng-model="c.state"></td>
+			</tr>
+			<tr>
+				<td><input type="text" ng-model="c.country"></td>
+				<td><input type="text" ng-model="c.emailId"></td>
+			</tr>
+			<tr>
+				<td><input type="text" ng-model="c.phone"></td>
+				<td><input type="text" ng-model="c.mobile"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="panel-footer">
+		<button type="submit" ng-disabled="dataLoading"
+			class="btn btn-success">Update</button>
+	</div>
+
+</form>

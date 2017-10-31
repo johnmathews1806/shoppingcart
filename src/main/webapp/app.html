@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="shoppingcart">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-
-
-
 </style>
 </head>
 <body>
-<!-- Top Menu -->
+	<!-- Top Menu -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-			 	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-        			<span class="icon-bar"></span>                        
-      			</button>
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
 				<button class="w3-button w3-teal w3-hide-large" onclick="w3_open()">&#9776;</button>
-				<a class="navbar-brand" href="#">Shopping Cart</a> 
+				<a class="navbar-brand" href="#">Shopping Cart</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
@@ -35,18 +33,18 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#logout"><span
-						class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
- <!-- 
+	<!-- 
  
 	 <div class="container-fluid">
-		<div class="row">--> 
-		
-			<!-- Side Menu -->
-<!-- 						
+		<div class="row">-->
+
+	<!-- Side Menu -->
+	<!-- 						
 			<div class="col-sm-4">
 				<ul class="nav nav-pills nav-stacked" >
 					<li><a href="#home">Home</a></li>
@@ -57,31 +55,33 @@
 					<li><a href="#menu5">menu5</a></li>
 				</ul>
 			</div>
-	 -->		
-			<!-- Body -->
-			<!-- Below div to take up col-sm-8 -->			
-		<!-- 	<div ng-view></div>	
+	 -->
+	<!-- Body -->
+	<!-- Below div to take up col-sm-8 -->
+	<!-- 	<div ng-view></div>	
 
 		 </div>
 	</div>
--->	
+-->
 	<!-- ---------------------------------------------------------------- -->
 
-<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2" style="width:200px;" id="mySidebar">
-	<a href="#home" class="w3-bar-item w3-button" onclick="w3_close()">Home</a>
-	<a href="#products" class="w3-bar-item w3-button" onclick="w3_close()">Products</a>
-	<a href="#orders" class="w3-bar-item w3-button" onclick="w3_close()">Manage Orders</a>
-	<a href="#menu3" class="w3-bar-item w3-button" onclick="w3_close()">menu3</a>
-	<a href="#menu4" class="w3-bar-item w3-button" onclick="w3_close()">menu4</a>
-	<a href="#menu5" class="w3-bar-item w3-button" onclick="w3_close()">menu5</a>
-</div>
+	<div class="w3-sidebar w3-bar-block w3-collapse w3-card-2"
+		style="width: 200px;" id="mySidebar">
+		<a href="#home" class="w3-bar-item w3-button" onclick="w3_close()">Home</a>
+		<a href="#products" class="w3-bar-item w3-button" onclick="w3_close()">Products</a>
+		<a href="#orders" class="w3-bar-item w3-button" onclick="w3_close()">Manage
+			Orders</a> <a href="#profile" class="w3-bar-item w3-button"
+			onclick="w3_close()">Profile</a> <a href="#menu4"
+			class="w3-bar-item w3-button" onclick="w3_close()">menu4</a> <a
+			href="#menu5" class="w3-bar-item w3-button" onclick="w3_close()">menu5</a>
+	</div>
 
-<div class="w3-main" style="margin-left:200px">
-	
-  	<div class="w3-container">
-    	<div ng-view></div>
-  	</div>
-</div>
+	<div class="w3-main" style="margin-left: 200px">
+
+		<div class="w3-container">
+			<div ng-view></div>
+		</div>
+	</div>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -95,14 +95,15 @@
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
-	
+
 	<!-- Application scripts -->
-	<script src="scripts/shoppingcart.js"></script>	
+	<script src="scripts/shoppingcart.js"></script>
 	<script src="login/login.service.js"></script>
 	<script src="home/home.controller.js"></script>
 	<script src="products/products.controller.js"></script>
+	<script src="profile/profile.controller.js"></script>
 	<script src="orders/orders.controller.js"></script>
-	<script src="logout/logout.controller.js"></script>	
+	<script src="logout/logout.controller.js"></script>
 	<script>
 		function w3_open() {
   			document.getElementById("mySidebar").style.display = "block";

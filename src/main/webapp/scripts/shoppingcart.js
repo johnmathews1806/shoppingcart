@@ -2,6 +2,7 @@
 angular.module('Authentication', []);
 angular.module('Home', []);
 angular.module('Products', []);
+angular.module('Profile', []);
 angular.module('Orders', ['ngRoute']);
 angular.module('Logout', []);
 var app = angular.module('shoppingcart',[
@@ -10,6 +11,7 @@ var app = angular.module('shoppingcart',[
 										'Authentication',		
 										'Home',
 										'Products',
+										'Profile',
 										'Orders',
 										'Logout'
 										]);
@@ -28,8 +30,9 @@ app.config(function($routeProvider) {
         templateUrl : 'orders/orders.html',
         controller : "ordersCtrl"
     })
-    .when("/menu3", {
-        templateUrl : 'menu3/menu3.html'
+    .when("/profile", {
+        templateUrl : 'profile/profile.html',
+        controller : "profileCtrl"
     })
     .when("/menu4", {
         templateUrl : 'menu4/menu4.html'

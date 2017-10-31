@@ -1,6 +1,7 @@
 package com.jm.shoppingcart.services;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -15,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jm.shoppingcart.entities.ContactDetail;
 import com.jm.shoppingcart.entities.Order;
+import com.jm.shoppingcart.entities.OrderDetail;
 import com.jm.shoppingcart.entities.User;
+
 
 @Service
 public class UserService {
@@ -95,5 +99,35 @@ public class UserService {
 		User user =(User)c.uniqueResult();	  
 		
 		return user;
+	}
+	
+	@Transactional
+	public List<ContactDetail>  getContactDetailsbyUser(User user){		
+		Session session=sessionFactory.getCurrentSession();
+		System.out.println("Obtained session4: "+session.toString());		
+		
+		Query query= session.createQuery("FROM ContactDetail c where c.user=:user");
+		query.setParameter("user", user);				
+		
+		List<ContactDetail> contactDetails =query.list();	  
+		
+		return contactDetails;
+	}
+	
+	@Transactional
+	public int updateContact(User user, List<ContactDetail>contactDetails){
+		int status = 1;
+		
+		Session session=sessionFactory.getCurrentSession();
+		System.out.println("Obtained session5: "+session.toString());		
+		Iterator i = contactDetails.iterator();
+		while(i.hasNext()){
+			ContactDetail contactDetail = (ContactDetail)i.next();
+			contactDetail.setUser(user);
+			session.saveOrUpdate(contactDetail);
+			status = 0;
+		}			  
+		
+		return status;
 	}
 }

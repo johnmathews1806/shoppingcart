@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "CONTACT_DETAILS")
 public class ContactDetail implements java.io.Serializable{
@@ -24,6 +27,7 @@ public class ContactDetail implements java.io.Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
+	@JsonIgnore
 	private User user;
 
 /*	@Column(name = "USER_ID")
@@ -54,16 +58,23 @@ public class ContactDetail implements java.io.Serializable{
 	private String 	mobile;
 
 	@Column(name = "CREATE_DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date createDate;
 
-	@Column(name = "CREATE_USER")
-	private String createuser;
+	@Column(name = "CREATE_USER")	
+	private String createUser;
 
-	@Column(name = "UPDATE_DATE")
+	@Column(name = "UPDATE_DATE")	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date updateDate;
 
-	@Column(name = "UPDATE_USER")
+	@Column(name = "UPDATE_USER")	
 	private String updateUser;
+
+	
+	public int getContactId() {
+		return contactId;
+	}
 
 	public User getuser() { 
 		return user;
@@ -153,12 +164,12 @@ public class ContactDetail implements java.io.Serializable{
 		this.createDate = createDate;
 	}
 
-	public String getCreateuser() {
-		return createuser;
+	public String getCreateUser() {
+		return createUser;
 	}
 
-	public void setCreateuser(String createuser) {
-		this.createuser = createuser;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 
 	public Date getUpdateDate() {
@@ -176,6 +187,5 @@ public class ContactDetail implements java.io.Serializable{
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
-
 
 }

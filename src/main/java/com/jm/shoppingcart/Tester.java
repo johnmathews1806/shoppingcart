@@ -2,6 +2,7 @@ package com.jm.shoppingcart;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -35,26 +36,30 @@ public class Tester {
 		System.out.println("In Main");
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 		//When Using hibernate without Spring
-/*		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
+		/*		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
 		//Session session=factory.openSession();  
 
 		 Session session=new AnnotationConfiguration()  
 		       .configure().buildSessionFactory().openSession();
-*/		
+		 */		
 		UserService userService = context.getBean(UserService.class);
 		//UserService service = new UserService();
 		ProductService prodService = context.getBean(ProductService.class);
 		OrderService orderService = context.getBean(OrderService.class);
-		
+
 		Tester tester = new Tester();
-/*		Iterator i = prodService.getProducts().iterator();
+		/*		Iterator i = prodService.getProducts().iterator();
 		while(i.hasNext()){
 			System.out.println(((Product)i.next()).getProductCode());			
 		}*/
-				
+		
+/*		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		System.out.println(cal.getTime());*/
+		
 		tester.insertData(userService,prodService,orderService);
 
-/*		System.out.println("Invoking service..");
+		/*		System.out.println("Invoking service..");
 		System.out.println("User details: "+userService.getUserbyLogin("jmjohn", "asdfsadf"));
 		Iterator m= userService.searchUserByName("John","X","Mathews").iterator();
 		while(m.hasNext()){
@@ -76,7 +81,7 @@ public class Tester {
 		entitymanager.close( );
 		emfactory.close( );
 		 */
-		context.close();
+		//context.close();
 	}
 
 	public void insertData(UserService userService,ProductService prodService,OrderService orderService){
@@ -91,7 +96,7 @@ public class Tester {
 
 		session.persist(user1); */
 
-	/*	Product prod = new Product();
+		/*	Product prod = new Product();
 		prod.setProductName("Samsung Galaxy");
 		prod.setDescription("Smart Phone");
 		prod.setPrice(new BigDecimal("65000"));
@@ -101,7 +106,7 @@ public class Tester {
 		prod.setUpdateUser("ADMIN");
 
 		session.persist(prod);		
-*/		
+		 */		
 		User user2 = userService.getUserbyLoginId("jmjohn1");
 
 		/*ContactDetail ctd = new ContactDetail();
@@ -131,19 +136,21 @@ public class Tester {
 		while(i.hasNext()){
 			System.out.println(((ContactDetail)i.next()).getAddress1());
 		}	 */
-		
-		Collection<Order> orders = orderService.getOrderbyUser(user2);
 
-	Iterator j = orders.iterator();
+		/*Collection<Order> orders = orderService.getOrderbyUser(user2);
+
+		Iterator j = orders.iterator();
 		while(j.hasNext()){
 			Collection<OrderDetail> details = ((Order)j.next()).getOrderDetails();
 			Iterator k =  details.iterator();
 			//while(k.hasNext()){
-				//System.out.println(((OrderDetail)k.next()).getAmount());	
+			//System.out.println(((OrderDetail)k.next()).getAmount());	
 			//}		    	
-		}
+		}*/
 
 		
+		orderService.deleteOrder(orderService.getOrderbyId(29));
+
 		/*Product prod1 = prodService.getProducts().get(0);
 		Product prod2 = prodService.getProducts().get(1);
 

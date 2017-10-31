@@ -50,13 +50,23 @@ public class OrderService {
 	}
 	
 	@Transactional
+	public Order getOrderbyId(int orderId){
+		Session session=sessionFactory.getCurrentSession();
+
+		Query query= session.createQuery("FROM Order o where o.orderId=:orderId");
+		query.setParameter("orderId", orderId);
+		
+		Order order =(Order)query.uniqueResult();
+
+		return order;
+	}
+	
+	@Transactional
 	public int createOrder(User user  , List<OrderDetail> orderDetails){
 		int status = 1;
-		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
-		//Session session=factory.openSession();  
-		//Transaction t=session.beginTransaction();  
+  
 		Session session=sessionFactory.getCurrentSession();		
-		
+		System.out.println("In create order: "+user.getUserId());
 		Order newOrder = new Order();
 		newOrder.setUser(user);		
 		session.persist(newOrder);
@@ -67,10 +77,21 @@ public class OrderService {
 			session.persist(detail);
 			status = 0;
 		}
+		return status;		
+	}
+	
+	@Transactional
+	public int deleteOrder(Order order){
+		int status = 1;
+		System.out.println("called delete");
+		Session session=sessionFactory.getCurrentSession();
+		try{
+		session.delete(order);
+		status = 0;
+		}catch(Exception e){
+			System.out.println("error in delete: "+e);
+		}		
 		return status;
-//		t.commit();  
-	//	session.close();  
-		
 		
 	}
 

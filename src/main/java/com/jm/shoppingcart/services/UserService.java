@@ -58,9 +58,9 @@ public class UserService {
 
 		//Query query= session.createQuery("FROM User U where ((:firstName is null and U.firstName is null) or U.firstName = :firstName) and ((:middleName is null and U.middleName is null) or U.middleName = :middleName) and ((:lastName is null and U.lastName is null) or U.lastName = :lastName))");		
 		Criteria c = session.createCriteria(User.class);
-		c.add(firstName == null ? Restrictions.isNull("firstName") : Restrictions.eq("firstName", firstName));
-		c.add(middleName == null ? Restrictions.isNull("middleName") : Restrictions.eq("middleName", middleName));
-		c.add(lastName == null ? Restrictions.isNull("lastName") : Restrictions.eq("lastName", lastName));
+		c.add(firstName == null ? Restrictions.isNull("firstName") : Restrictions.eq("firstName", firstName.toUpperCase()));
+		c.add(middleName == null ? Restrictions.isNull("middleName") : Restrictions.eq("middleName", middleName.toUpperCase()));
+		c.add(lastName == null ? Restrictions.isNull("lastName") : Restrictions.eq("lastName", lastName.toUpperCase()));
 		//query.setParameter("firstName", firstName);
 		//query.setParameter("middleName", null);
 		//query.setParameter("lastName", lastName);
@@ -76,7 +76,7 @@ public class UserService {
 		System.out.println("Obtained session3: "+session.toString());		
 		
 		Criteria c = session.createCriteria(User.class);
-		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId));
+		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId.toUpperCase()));
 		c.add(password == null ? Restrictions.isNull("password") : Restrictions.eq("password", password));		
 		
 		User user =(User)c.uniqueResult();	  
@@ -90,7 +90,7 @@ public class UserService {
 		System.out.println("Obtained session3: "+session.toString());		
 		
 		Criteria c = session.createCriteria(User.class);
-		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId));				
+		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId.toUpperCase()));				
 		
 		User user =(User)c.uniqueResult();	  
 		

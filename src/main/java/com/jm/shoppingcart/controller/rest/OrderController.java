@@ -40,12 +40,11 @@ public class OrderController {
 	private ProductService prodService;
 
 	
-	@RequestMapping(value={"/createOrder/{loginId}/{orderId}"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/createOrder/{loginId}"}, method=RequestMethod.POST)
 
-	public ResponseEntity<Integer> createOrder(@PathVariable("loginId") String loginId,@PathVariable("orderId") String orderId,@RequestBody String orderRequest) {
+	public ResponseEntity<Integer> createOrder(@PathVariable("loginId") String loginId, @RequestBody String orderRequest) {
 
-		System.out.println("User : "+loginId);
-		System.out.println("order id : "+orderId);
+		System.out.println("User : "+loginId);		
 		System.out.println("order details: "+orderRequest);
 		ObjectMapper mapper = new ObjectMapper();
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();		
@@ -82,6 +81,14 @@ public class OrderController {
 	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId) {
 
 		return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value={"/deleteOrder/{orderId}"}, method=RequestMethod.DELETE)
+
+	public ResponseEntity<Integer> delete(@PathVariable("orderId") int orderId) {
+
+		return new ResponseEntity<Integer>(orderService.deleteOrder(orderService.getOrderbyId(orderId)),HttpStatus.OK);
 
 	}
 

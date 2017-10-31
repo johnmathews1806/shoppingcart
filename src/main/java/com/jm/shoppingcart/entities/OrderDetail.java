@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ORDERS_DETAILS")
@@ -24,10 +27,11 @@ public class OrderDetail implements java.io.Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="ORDER_ID", nullable=false)
+	@JsonIgnore
 	private Order order;
 	
 	@ManyToOne
-	@JoinColumn(name="PRODUCT_ID", nullable=false)
+	@JoinColumn(name="PRODUCT_ID", nullable=false)	
 	private Product product;
 	
 	@Column(name = "QUANTITY")

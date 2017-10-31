@@ -33,22 +33,20 @@ angular.module('Products')
 	};
 	
 	$scope.order = function(){		
-		//alert("order called"+$rootScope.globals.currentUser.userid);
 		//alert("cart: "+$scope.cart);
 		$scope.orderArray = [];		
 		angular.forEach($scope.cart, function(order){			
-			$scope.orderArray.push({"productId":order.productId,"productName":order.productName,"amount":order.price*order.quantity,"quantity":order.quantity});
-			alert("array");
+			$scope.orderArray.push({"productId":order.productId,"productName":order.productName,"amount":order.price*order.quantity,"quantity":order.quantity});			
 		});		
-		//alert($scope.orderArray);		
-		var order_id  = Math.floor(Math.random()*10000);
+		//alert("array: "+$scope.orderArray);		
+		//var order_id  = Math.floor(Math.random()*10000);
 		//alert(order_id);		
 		//var order_object = {"orderId":order_id,"loginId":$rootScope.globals.currentUser.userid,"orderDetail":$scope.orderArray};		
 		var order_object = {"orderDetails":$scope.orderArray};
-		alert(order_object);
+		//alert("order_object: "+order_object);
 		var order = JSON.stringify(order_object);		
-		alert(order);		
-		$http.post("http://localhost:9000/shoppingcart/createOrder/"+$rootScope.globals.currentUser.userid+"/"+order_id,order)
+		//alert("order: "+order);		
+		$http.post("http://localhost:9000/shoppingcart/createOrder/"+$rootScope.globals.currentUser.userid,order)
 		//$http.post("http://localhost:3000/orders",order)
 		.then(function(response){
 				//alert("success"+response.status);

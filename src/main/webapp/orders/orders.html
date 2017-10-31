@@ -16,11 +16,11 @@
 			<tr ng-repeat="order in orders">
 				<td><input type="radio" ng-model="$parent.selectedOrder" ng-value="order.orderId" ></td>
 				<td>{{order.orderId}}</td>
-				<td><ul ng-repeat="item in order.orderDetail">
-				<li>{{item.productName}} - {{item.quantity}}</li>
+				<td><ul ng-repeat="item in order.orderDetails">
+				<li>{{item.product.productName}} - {{item.quantity}}, {{item.amount}}</li>
 				</ul></td>				
 			</tr>
 		</tbody>
-	</table>
+	</table>	
 <button type="submit" ng-disabled="dataLoading" class="btn btn-success">Delete Order</button>
 </form>

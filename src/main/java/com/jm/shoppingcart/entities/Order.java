@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ORDERS")
@@ -27,11 +33,13 @@ public class Order implements java.io.Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
-	@Transient
+	@JsonIgnore
 	private User user;
 	
-	@OneToMany(mappedBy="order")
-	@Transient
+	@OneToMany(mappedBy="order",fetch = FetchType.EAGER,cascade = javax.persistence.CascadeType.REMOVE)	
+	@Cascade(CascadeType.DELETE)
+	//@Transient
+	//@JsonIgnore
 	private Collection<OrderDetail> orderDetails;
 	
 	@Column(name = "TOTAL")

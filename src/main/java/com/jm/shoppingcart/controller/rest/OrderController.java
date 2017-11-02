@@ -40,7 +40,7 @@ public class OrderController {
 	private ProductService prodService;
 
 	
-	@RequestMapping(value={"/createOrder/{loginId}"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/secure/createOrder/{loginId}"}, method=RequestMethod.POST)
 
 	public ResponseEntity<Integer> createOrder(@PathVariable("loginId") String loginId, @RequestBody String orderRequest) {
 
@@ -76,7 +76,7 @@ public class OrderController {
 
 	}
 	
-	@RequestMapping(value={"/getOrders/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value={"/secure/getOrders/{loginId}"}, method=RequestMethod.GET, produces="application/json")
 
 	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId) {
 
@@ -84,7 +84,7 @@ public class OrderController {
 
 	}
 	
-	@RequestMapping(value={"/deleteOrder/{orderId}"}, method=RequestMethod.DELETE)
+	@RequestMapping(value={"/secure/deleteOrder/{orderId}"}, method=RequestMethod.DELETE)
 
 	public ResponseEntity<Integer> delete(@PathVariable("orderId") int orderId) {
 

@@ -32,7 +32,7 @@ public class UserController {
 	private UserService userService;
 
 	
-	@RequestMapping(value={"/getUser/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value={"/secure/getUser/{loginId}"}, method=RequestMethod.GET, produces="application/json")
 
 	public ResponseEntity<User> get(@PathVariable("loginId") String loginId) {
 
@@ -40,7 +40,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value={"/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value={"/secure/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
 
 	public ResponseEntity<List<ContactDetail>> getContactDetails(@PathVariable("loginId") String loginId) {
 
@@ -49,7 +49,7 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value={"/updateContacts/{loginId}"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/secure/updateContacts/{loginId}"}, method=RequestMethod.POST)
 	public ResponseEntity<Integer> updateContacts(@PathVariable("loginId") String loginId, @RequestBody List<ContactDetail> contactDetails) {
 
 		System.out.println("User : "+loginId);		

@@ -4,16 +4,19 @@ angular.module('Products')
 	//alert("started controller");
 	
 	$scope.grandTotal = 0;
+	$scope.dataLoading = true;
 	
 	//$http.get("http://localhost:3000/products")
-	$http.get("http://localhost:9000/shoppingcart/getProducts")
+	$http.get("http://localhost:9000/shoppingcart/secure/getProducts")
 	.then(function (response) {
 		//alert("in products");
 		//alert(response.data);
 		$scope.products = response.data;
+		$scope.dataLoading = false;
 	},function(response) {    		
 		$scope.error = "Host down or Network issue!";    		
     	//alert($scope.error);    	
+		$scope.dataLoading = false;
 	});
 	
 	$scope.addToCart = function(productId,productName,price,num){
@@ -46,7 +49,7 @@ angular.module('Products')
 		//alert("order_object: "+order_object);
 		var order = JSON.stringify(order_object);		
 		//alert("order: "+order);		
-		$http.post("http://localhost:9000/shoppingcart/createOrder/"+$rootScope.globals.currentUser.userid,order)
+		$http.post("http://localhost:9000/shoppingcart/secure/createOrder/"+$rootScope.globals.currentUser.userid,order)
 		//$http.post("http://localhost:3000/orders",order)
 		.then(function(response){
 				//alert("success"+response.status);

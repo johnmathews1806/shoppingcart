@@ -21,7 +21,7 @@ public class ProductController {
 	private ProductService productService;
 
 	
-	@RequestMapping(value={"/getProducts"}, method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value={"/secure/getProducts"}, method=RequestMethod.GET, produces="application/json")
 
 	public ResponseEntity<List<Product>> get() {
 

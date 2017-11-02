@@ -11,7 +11,7 @@ angular.module('Authentication')
 			//alert(password);
 			var status={"valid":false,"message":""};
 			//var validUser = false;
-			$http.get("http://localhost:9000/shoppingcart/getUser/"+userid)
+			$http.get("http://localhost:9000/shoppingcart/secure/getUser/"+userid)
 			//When Response is OK
 			.then(function (response) {    	
 				//alert("request: "+password);

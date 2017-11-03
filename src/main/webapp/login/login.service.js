@@ -5,6 +5,38 @@ angular.module('Authentication')
 	function($http,$rootScope,$cookieStore,$window) {
 	return{
 
+		SecureLogin : function(userid,password,callback){
+			//alert("called Login service");		
+			//alert(userid);
+			//alert(password);
+			var status={"valid":false,"message":""};
+			//var validUser = false;
+			$http.get("http://localhost:9000/shoppingcart/secure/getUser/"+userid)
+			//When Response is OK
+			.then(function (response) {    	
+				//alert("request: "+password);
+				//alert("response: "+response.data.password);
+				if(password==response.data.password && 
+						angular.lowercase(userid)==angular.lowercase(response.data.loginId)){    					
+					//validUser = true;
+					status.valid=true;    										
+				}    				
+
+				if(!status.valid){
+					status.message="Incorrect Credentials";
+				}
+				//alert(status.message);    	    	
+				callback(status);
+			}
+			//When Response is NOT OK
+			,function(response) {    		
+				status.message = "Host down or Network issue!";    		
+				//alert(status.message);        	
+				callback(status);
+			});    	
+
+		},
+
 		Login : function(userid,password,callback){
 			//alert("called Login service");		
 			//alert(userid);

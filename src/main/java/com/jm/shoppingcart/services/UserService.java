@@ -33,6 +33,7 @@ public class UserService {
         this.sessionFactory = sessionFactory;
     }
 	
+	//like match
 	@Transactional
 	public List<User> searchUserByName(String firstName, String middleName, String lastName){
 		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
@@ -55,6 +56,7 @@ public class UserService {
 		return user;
 	}
 
+	//exact match
 	@Transactional
 	public List<User> getUserByName(String firstName, String middleName, String lastName){
 		Session session=sessionFactory.getCurrentSession();

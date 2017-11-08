@@ -5,7 +5,7 @@ angular.module('Authentication')
 		//alert("in login");
 		$scope.error = false;
 		$scope.dataLoading = true;
-		AuthenticationService.Login($scope.userid, $scope.password,function(status){
+		AuthenticationService.SecureLogin($scope.userid, $scope.password,function(status){
 			//alert("in callback2");
 			//alert(status.valid);
 			//alert(status.message);

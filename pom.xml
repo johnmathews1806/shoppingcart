@@ -26,6 +26,9 @@
 
 		<!-- Commons DBCP -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
+		
+		<!-- Servlets -->
+		<servlet.version>2.5</servlet.version>
 
 	</properties>
 
@@ -100,8 +103,16 @@
 			<artifactId>ojdbc</artifactId>
 			<version>${jdbc-oracle.version}</version>
 		</dependency>
+		
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>			
+		</dependency>
 
-
+		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

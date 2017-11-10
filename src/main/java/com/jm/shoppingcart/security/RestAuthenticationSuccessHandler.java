@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -29,11 +31,11 @@ extends SimpleUrlAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, 
 			HttpServletResponse response, Authentication authentication)
-					throws ServletException, IOException {
+					throws ServletException, IOException {		
 		System.out.println("Success Handler: "+ ((User)authentication.getPrincipal()).getFirstName());
 		User user = (User)authentication.getPrincipal();
 		System.out.println("Success Handler: "+ user);
-		user.setPassword(null);
+		//user.setPassword(null);		
 		SecurityUtils.sendResponse(response, HttpStatus.OK, user);
 	}
 }

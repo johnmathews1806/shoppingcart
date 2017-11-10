@@ -31,10 +31,18 @@
 					<li><a href="#">Page 1</a></li>
 					<li><a href="#">Page 2</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
+				  
+				<ul class="nav navbar-nav navbar-right" >
 					<li><a href="#logout"><span
 							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 				</ul>
+				
+				<!--
+				<ul class="nav navbar-nav navbar-right" ng-controller = "logoutCtrl" >
+					<li><a ng-click="logout();" ><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+				</ul>
+				-->
 			</div>
 		</div>
 	</nav>
@@ -103,7 +111,8 @@
 	<script src="products/products.controller.js"></script>
 	<script src="profile/profile.controller.js"></script>
 	<script src="orders/orders.controller.js"></script>
-	<script src="logout/logout.controller.js"></script>
+	 <script src="logout/logout.controller.js"></script> 
+	<!--<script src="scripts/shoppingcart.controller.js"></script>-->
 	<script>
 		function w3_open() {
   			document.getElementById("mySidebar").style.display = "block";

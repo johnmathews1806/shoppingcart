@@ -1,5 +1,5 @@
 angular.module('Profile')
-.controller('profileCtrl', function($scope,$rootScope,$http,$location) {	
+.controller('profileCtrl', function($scope,$rootScope,$http,$route) {	
 
 	//alert("started profile controller");
 	$scope.dataLoading = true;
@@ -18,13 +18,15 @@ angular.module('Profile')
 
 	$scope.updateContact = function(){				
 		//alert("contacts: "+JSON.stringify($scope.contactDetails));
-		
+		$scope.submitInProcess = true;
 		$http.post("http://localhost:9000/shoppingcart/secure/updateContacts/"+$rootScope.globals.currentUser.userid, $scope.contactDetails)
 			.then(function(response){
+				$scope.submitInProcess = false;
 				//alert("success"+response.status);
-				$location.path('/profile');			  	
+				$route.reload();							  	
 			}, 
 			function(response){
+				$scope.submitInProcess = false;
 				alert("failure"+response.status);
 				alert("failure"+response.statusText);
 			}

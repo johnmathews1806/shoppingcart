@@ -2,7 +2,7 @@
 angular.module('Authentication', []);
 angular.module('Home', []);
 angular.module('Products', []);
-angular.module('Profile', []);
+angular.module('Profile', ['ngRoute']);
 angular.module('Orders', ['ngRoute']);
 angular.module('Logout', []);
 var app = angular.module('shoppingcart',[
@@ -12,8 +12,8 @@ var app = angular.module('shoppingcart',[
 										'Home',
 										'Products',
 										'Profile',
-										'Orders',
-										'Logout'
+										'Orders'
+										,'Logout'
 										]);
 
 app.config(function($routeProvider) {	
@@ -41,8 +41,9 @@ app.config(function($routeProvider) {
         templateUrl : 'menu5/menu5.html'
     })    
     .when("/logout", {
-        templateUrl : 'logout/logout.html',
-        controller : "logoutCtrl"
+        //templateUrl : 'logout/logout.html', //This blocks logout when server is down
+    	template : '<html>Logging out...</html>',
+        controller : "logoutCtrl"  
     })    
     .otherwise({
         redirectTo: '/home'

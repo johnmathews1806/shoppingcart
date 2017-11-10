@@ -4,16 +4,18 @@ angular.module('Logout')
 	
 		//alert('calling logout...');
 		
-		$http({
-	        method: 'post',
-	        url: 'logout'	        
-	    })
+		//$http({
+	      //  method: 'get',
+	      //  url: 'logout'	        
+	    //})
+	    //$http.post('logout', {})
+	    $http.get('logout')
 		//When Response is OK
-		.then(function (response) {    	
+		.then(function () {    	
 			alert("logout success");			
 		}
 		//When Response is NOT OK
-		,function(response) {			    		
+		,function() {			    		
 			alert("logout failure");			
 		});
 		AuthenticationService.ClearCredentials();

@@ -29,12 +29,10 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 		this.userService=userService;
 	}
 
-	SecurityContext securityContext = SecurityContextHolder.getContext();
-	Authentication auth = securityContext.getAuthentication();
+	public Authentication authenticate1(Authentication authentication) throws AuthenticationException {		
 
-
-
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		Authentication auth = securityContext.getAuthentication();
 
 		System.out.println("in authenticate: " +authentication);
 		System.out.println("Logged in Principal: " +authentication.getPrincipal());
@@ -67,14 +65,45 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 			}			
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-			
+
 
 			auth = new UsernamePasswordAuthenticationToken(user, password ,grantedAuths);
-			//auth = new UsernamePasswordAuthenticationToken(user, password);
-			//*//System.out.println("AUTH token: "+auth);			
+			//System.out.println("AUTH token: "+auth);			
 		}
-		return auth;
-		//return new UsernamePasswordAuthenticationToken(user, password);
+		return auth;	
+	}
+
+
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
+
+		System.out.println("in authenticate: " +authentication);
+		System.out.println("Logged in Principal: " +authentication.getPrincipal());
+		System.out.println("Logged in Credential: " +authentication.getCredentials());
+
+		if(!authentication.isAuthenticated()) {						
+
+			String loginId = authentication.getName().trim();
+			System.out.println("loginId: "+loginId);
+
+			String password = (String)authentication.getCredentials();
+			System.out.println("password: "+password);			
+
+			User user = userService.getUserbyLoginId(loginId);
+			
+			if (user == null ) {
+				System.out.println("BAD USER: ");
+				throw new BadCredentialsException("Username not found.");				
+			}else if(!password.equals(user.getPassword())) {
+				System.out.println("INCORRECT PASSWORD ");
+				throw new BadCredentialsException("Invalid Password." );		   	 
+			}			
+			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+			authentication = new UsernamePasswordAuthenticationToken(user, password ,grantedAuths);			
+		}
+		return authentication;
+
 	}
 
 

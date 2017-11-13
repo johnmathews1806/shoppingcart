@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import com.jm.shoppingcart.beans.OrderList;
 import com.jm.shoppingcart.entities.Order;
 import com.jm.shoppingcart.entities.OrderDetail;
 import com.jm.shoppingcart.entities.Product;
+import com.jm.shoppingcart.entities.User;
 import com.jm.shoppingcart.services.OrderService;
 import com.jm.shoppingcart.services.ProductService;
 import com.jm.shoppingcart.services.UserService;
@@ -78,9 +80,18 @@ public class OrderController {
 	
 	@RequestMapping(value={"/secure/getOrders/{loginId}"}, method=RequestMethod.GET, produces="application/json")
 
-	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId) {
+	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId, Authentication authentication) {
 
-		return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
+		System.out.println("IN REST1: "+authentication.getPrincipal());
+		User user = (User)authentication.getPrincipal();
+		System.out.println("IN REST2: "+user.getLoginId());
+		if(loginId.toUpperCase().equals(user.getLoginId())){
+			return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(user.getLoginId())),HttpStatus.OK);	
+		}else{
+			return null;
+		}
+		//return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
+		
 
 	}
 	

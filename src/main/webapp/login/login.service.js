@@ -24,8 +24,13 @@ angular.module('Authentication')
 				callback(status);
 			}
 			//When Response is NOT OK
-			,function(response) {    		
-				status.message = "Host down or Network issue!";    		
+			,function(response) {  
+				//alert(response.data);
+				if(response.data){
+					status.message = response.data;
+				}else{					
+					status.message = "Host down or Network issue!";
+				}
 				//alert(status.message);        	
 				callback(status);
 			});    	

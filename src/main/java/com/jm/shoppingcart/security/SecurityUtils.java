@@ -34,8 +34,8 @@ public final class SecurityUtils {
     	  response.setContentType("application/json;charset=UTF-8");
           response.setStatus(status);
           PrintWriter writer = response.getWriter();
-          //ErrorMessageDTO error = new ErrorMessageDTO(ErrorMessageType.INFO, exception.getMessage());
-          writer.write(mapper.writeValueAsString("error"));
+          //ErrorMessageDTO error = new ErrorMessageDTO(ErrorMessageType.INFO, exception.getMessage());          
+          writer.write(mapper.writeValueAsString(exception.getMessage()));
           writer.flush();
           writer.close();
     }

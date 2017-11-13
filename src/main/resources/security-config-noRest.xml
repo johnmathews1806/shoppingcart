@@ -27,17 +27,21 @@
 		<intercept-url pattern="/login" access="permitAll" />
 		
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-				
-		<logout logout-url="/logout"  />		
 		
-		
-		<form-login login-page="/login"	
+    <form-login login-page="/login"	
 			
 			login-processing-url="/login"		 
 			username-parameter="username"
 			password-parameter="password"			 
 		/>
-		<csrf disabled="true"/>
+    <csrf disabled="true"/>
+
+		<logout logout-url="/logout" invalidate-session="true"
+			logout-success-url="/index.html"  delete-cookies="JSESSIONID" />
+		
+		
+		
+		
 	</http>
 	
 	<authentication-manager >
@@ -47,7 +51,6 @@
 	</authentication-manager>
 	
 	
-	<b:bean id ="cartAuthenticationProvider" class="com.jm.shoppingcart.security.CartAuthenticationProvider"></b:bean>
-
+	<!--<b:bean id ="cartAuthenticationProvider" class="com.jm.shoppingcart.security.CartAuthenticationProvider"></b:bean>-->
 </b:beans>
 

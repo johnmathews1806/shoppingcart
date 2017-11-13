@@ -92,10 +92,10 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 			
 			if (user == null ) {
 				System.out.println("BAD USER: ");
-				throw new BadCredentialsException("Username not found.");				
+				throw new BadCredentialsException("Invalid username or Password");				
 			}else if(!password.equals(user.getPassword())) {
 				System.out.println("INCORRECT PASSWORD ");
-				throw new BadCredentialsException("Invalid Password." );		   	 
+				throw new BadCredentialsException("Invalid username or Password" );		   	 
 			}			
 			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
 			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));

@@ -1,7 +1,7 @@
 
 <b:beans xmlns="http://www.springframework.org/schema/security"
-	xmlns:context="http://www.springframework.org/schema/context" 
-	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:b="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,14 +11,14 @@
 						http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-
+	
 	<context:annotation-config />
 	<!-- <context:component-scan base-package="com.jm.shoppingcart" /> -->
-	<b:import resource="classpath*:application-context.xml"/> 
+	<!--<b:import resource="classpath*:application-context.xml"/>-->
 
 
-	<http entry-point-ref="restAuthenticationEntryPoint"
-		use-expressions="true">
+	<http 	entry-point-ref="restAuthenticationEntryPoint"
+			use-expressions="true">
 
 		<intercept-url pattern="/index.html" access="permitAll" />
 		<intercept-url pattern="/app.html" access="permitAll" />
@@ -29,17 +29,17 @@
 		<intercept-url pattern="/orders/**" access="permitAll" />
 		<intercept-url pattern="/profile/**" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/logout" access="permitAll" />
-
+		<!--<intercept-url pattern="/logout" access="permitAll" />-->
+				
 		<intercept-url pattern="/**" access="authenticated" />
-
-		<access-denied-handler ref="restAccessDeniedHandler" />
-
+		
+		<access-denied-handler ref="restAccessDeniedHandler"/>
+		
 		<form-login login-page="/login" login-processing-url="/login"
 			username-parameter="username" password-parameter="password"
-			authentication-success-handler-ref="restAuthenticationSuccessHandler"
+			authentication-success-handler-ref="restAuthenticationSuccessHandler"                    
 			authentication-failure-handler-ref="restAuthenticationFailureHandler" />
-		<csrf disabled="true" />
+		<csrf disabled="true"/>
 
 		<logout logout-url="/logout" invalidate-session="true"
 			success-handler-ref="cartLogoutHandler" delete-cookies="JSESSIONID" />
@@ -52,29 +52,29 @@
 			<concurrency-control max-sessions="1" /> 
 		</session-management> -->
 	</http>
-
-	<authentication-manager>
+	
+	<authentication-manager >
 		<authentication-provider ref="cartAuthenticationProvider">
-
-		</authentication-provider>
+		
+		</authentication-provider>		
 	</authentication-manager>
-
+	
 	<!-- <b:bean id="cartLogoutHandler" class="com.jm.shoppingcart.security.CartLogoutHandler"></b:bean> -->
 	<!-- <b:bean id ="cartLogoutHandler" class="org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler"></b:bean> -->
 
-
+	
 	<b:bean id="restAccessDeniedHandler"
 		class="com.jm.shoppingcart.security.RestAccessDeniedHandler"></b:bean>
-
+	
 	<b:bean id="restAuthenticationFailureHandler"
 		class="com.jm.shoppingcart.security.RestAuthenticationFailureHandler"></b:bean>
-
+	
 	<b:bean id="restAuthenticationSuccessHandler"
 		class="com.jm.shoppingcart.security.RestAuthenticationSuccessHandler"></b:bean>
-
+	
 	<b:bean id="restAuthenticationEntryPoint"
 		class="com.jm.shoppingcart.security.RestUnauthorizedEntryPoint"></b:bean>
-
+	
 	<!-- <b:bean id ="cartAuthenticationProvider" class="com.jm.shoppingcart.security.CartAuthenticationProvider"></b:bean> -->
 
 </b:beans>

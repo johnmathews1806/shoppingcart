@@ -12,11 +12,11 @@ angular.module('Logout')
 	    $http.get('logout')
 		//When Response is OK
 		.then(function () {    	
-			alert("logout success");			
+			//alert("logout success");			
 		}
 		//When Response is NOT OK
 		,function() {			    		
-			alert("logout failure");			
+			//alert("logout failure");			
 		});
 		AuthenticationService.ClearCredentials();
 		//$location.path('/login');

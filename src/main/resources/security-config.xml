@@ -30,6 +30,9 @@
 		<intercept-url pattern="/profile/**" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<!--<intercept-url pattern="/logout" access="permitAll" />-->
+		
+		<intercept-url pattern="/secure/getOrders/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/secure/getContactDetails/**" access="hasRole('ROLE_USER')" />
 				
 		<intercept-url pattern="/**" access="authenticated" />
 		

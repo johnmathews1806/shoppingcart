@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.jm.shoppingcart.services.UserService;
+import com.jm.shoppingcart.entities.Role;
 import com.jm.shoppingcart.entities.User;
 
 @Component
@@ -97,8 +98,12 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 				System.out.println("INCORRECT PASSWORD ");
 				throw new BadCredentialsException("Invalid username or Password" );		   	 
 			}			
-			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-			grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();			
+			for(Role role:user.getRoles()){
+				grantedAuths.add(new SimpleGrantedAuthority(role.getRoleName()));	
+			}
+			
+			
 
 			authentication = new UsernamePasswordAuthenticationToken(user, password ,grantedAuths);			
 		}

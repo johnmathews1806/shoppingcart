@@ -36,6 +36,7 @@
 				<value>com.jm.shoppingcart.entities.Order</value>
 				<value>com.jm.shoppingcart.entities.OrderDetail</value>
 				<value>com.jm.shoppingcart.entities.ContactDetail</value>
+				<value>com.jm.shoppingcart.entities.Role</value>
 			</list>
 		</property>
 		<!--

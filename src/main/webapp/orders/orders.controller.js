@@ -10,8 +10,12 @@ angular.module('Orders')
 		//alert(JSON.stringify(response.data));
 		$scope.orders = response.data;
 		$scope.dataLoading = false;
-	},function(response) {    		
-		$scope.error = "Host down or Network issue!";    		
+	},function(response) {    
+		if(response.status=403){
+			$scope.error = "Access Denied";
+		}else{
+			$scope.error = "Host down or Network issue!";
+		}
     	//alert($scope.error);    
 		$scope.dataLoading = false;
 	});

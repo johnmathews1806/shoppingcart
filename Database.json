@@ -35,59 +35,17 @@
   ],
   "orders": [
     {
-      "id": 1924,
-      "order": [
+      "orderId": 590,
+      "loginId": "jmjohn",
+      "orderDetail": [
         {
+          "productCode": "HTC201610",
           "productName": "One",
-          "price": 36500,
+          "amount": 43000,
           "quantity": 1
         }
-      ]
-    },
-    {
-      "id": 5353,
-      "order": [
-        {
-          "productName": "One",
-          "price": 36500,
-          "quantity": 3
-        },
-        {
-          "productName": "Galaxy S8",
-          "price": 45000,
-          "quantity": 4
-        },
-        {
-          "productName": "Iphone",
-          "price": 68000,
-          "quantity": 1
-        },
-        {
-          "productName": "Nexus 7",
-          "price": 53000,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": 934,
-      "order": [
-        {
-          "productName": "One",
-          "price": 43000,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": 3711,
-      "order": [
-        {
-          "productName": "Nexus 9",
-          "price": 45000,
-          "quantity": 1
-        }
-      ]
+      ],
+      "id": 1
     }
   ]
 }

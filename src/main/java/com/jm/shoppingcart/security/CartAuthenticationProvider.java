@@ -39,12 +39,12 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 		System.out.println("Logged in Principal: " +authentication.getPrincipal());
 		System.out.println("Logged in Credential: " +authentication.getCredentials());
 
-		if(auth != null){
+		/*if(auth != null){
 			System.out.println("From Security Contexnt-in authenticate: " +auth);
 			System.out.println("From Security Contexnt-Logged in Principal: " +auth.getPrincipal());
 			System.out.println("From Security Contexnt-Logged in Credential: " +auth.getCredentials());
 			System.out.println("From Security Contexnt-Is authenticated? "+auth.isAuthenticated());
-		}
+		}*/
 		//System.out.println("Previous auth: " +auth);
 		if(auth == null) {			
 			System.out.println("Is authenticated? "+authentication.isAuthenticated());			

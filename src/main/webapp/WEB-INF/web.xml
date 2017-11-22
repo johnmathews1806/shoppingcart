@@ -10,10 +10,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:application-context.xml,classpath:security-config.xml
+			classpath:application-context.xml
 		</param-value>
 	</context-param>
-
+	<!-- classpath:security-config.xml = this is imported via application-context.xml-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

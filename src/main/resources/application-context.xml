@@ -11,10 +11,11 @@
                    http://www.springframework.org/schema/tx
                    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<import resource="classpath:security-config.xml"/>
+	
 	<context:annotation-config />
 	<context:component-scan base-package="com.jm.shoppingcart" />
 	
-	<!-- <import resource="classpath:security-config.xml"/> -->
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -37,6 +38,7 @@
 				<value>com.jm.shoppingcart.entities.OrderDetail</value>
 				<value>com.jm.shoppingcart.entities.ContactDetail</value>
 				<value>com.jm.shoppingcart.entities.Role</value>
+				<value>com.jm.shoppingcart.entities.Permission</value>
 			</list>
 		</property>
 		<!--
@@ -53,10 +55,10 @@
 		</property>
 		
 	</bean>
-	
-	<bean id="userService" class="com.jm.shoppingcart.services.UserService"></bean>
-	<bean id="productService" class="com.jm.shoppingcart.services.ProductService"></bean>
-	<bean id="orderService" class="com.jm.shoppingcart.services.OrderService"></bean>
+	 
+	<bean id="userService" class="com.jm.shoppingcart.services.UserServiceImpl"></bean>
+	<bean id="productService" class="com.jm.shoppingcart.services.ProductServiceImpl"></bean>
+	<bean id="orderService" class="com.jm.shoppingcart.services.OrderServiceImpl"></bean>
     
     <tx:annotation-driven transaction-manager="transactionManager"/>    
     <bean id="transactionManager"

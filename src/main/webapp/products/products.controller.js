@@ -14,7 +14,11 @@ angular.module('Products')
 		$scope.products = response.data;
 		$scope.dataLoading = false;
 	},function(response) {    		
-		$scope.error = "Host down or Network issue!";    		
+		if(response.status=403){
+			$scope.error = "Access Denied";
+		}else{
+			$scope.error = "Host down or Network issue!";
+		}		    		
     	//alert($scope.error);    	
 		$scope.dataLoading = false;
 	});
@@ -56,8 +60,13 @@ angular.module('Products')
 				$location.path('/orders');			  	
 			   }, 
 			   function(response){
-				   alert("failure"+response.status);
-				   alert("failure"+response.statusText);
+				   if(response.status=403){
+						//$scope.error = "You do not have rights to perform this action !";
+					   alert("You do not have rights to perform this action !");
+					}else{
+						$scope.error = "Host down or Network issue!";
+					}				   
+				   //alert("failure"+response.statusText);
 			   }
 		);		
 		

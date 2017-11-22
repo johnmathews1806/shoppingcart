@@ -1,15 +1,18 @@
 package com.jm.shoppingcart.entities;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,9 +28,17 @@ public class Role implements java.io.Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int roleId;
 	
-	@ManyToMany(mappedBy="roles")
+	@OneToMany(mappedBy="role")
 	@Transient
 	private Set<User> users = new HashSet();
+	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = { javax.persistence.CascadeType.ALL })
+	@JoinTable(
+	        name = "role_permission", 
+	        joinColumns = { @JoinColumn(name = "role_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "permission_id") }
+	    )
+	private Set<Permission> permissions = new HashSet<Permission>();
 			
 	@Column(name = "ROLE_NAME")
 	private String roleName;
@@ -37,6 +48,8 @@ public class Role implements java.io.Serializable{
 	
 	@Column(name = "STATUS")
 	private String status;
+	
+	
 
 	public int getRoleId() {
 		return roleId;
@@ -72,6 +85,14 @@ public class Role implements java.io.Serializable{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
 	}
 	
 		

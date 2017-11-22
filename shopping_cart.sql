@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - Friday-November-17-2017   
+--  File created - Wednesday-November-22-2017   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence HIBERNATE_SEQUENCE
@@ -57,6 +57,16 @@
 	"AMOUNT" NUMBER(20,2)
    ) ;
 --------------------------------------------------------
+--  DDL for Table PERMISSIONS
+--------------------------------------------------------
+
+  CREATE TABLE "PERMISSIONS" 
+   (	"PERMISSION_ID" NUMBER(10,0), 
+	"PERMISSION_NAME" VARCHAR2(30), 
+	"PERMISSION_DESCRIPTION" VARCHAR2(100), 
+	"STATUS" VARCHAR2(1)
+   ) ;
+--------------------------------------------------------
 --  DDL for Table PRODUCTS
 --------------------------------------------------------
 
@@ -84,6 +94,14 @@
 	"STATUS" VARCHAR2(1)
    ) ;
 --------------------------------------------------------
+--  DDL for Table ROLE_PERMISSION
+--------------------------------------------------------
+
+  CREATE TABLE "ROLE_PERMISSION" 
+   (	"ROLE_ID" NUMBER(10,0), 
+	"PERMISSION_ID" NUMBER(10,0)
+   ) ;
+--------------------------------------------------------
 --  DDL for Table USERS
 --------------------------------------------------------
 
@@ -98,7 +116,8 @@
 	"CREATE_DATE" DATE, 
 	"CREATE_USER" VARCHAR2(20), 
 	"UPDATE_DATE" DATE, 
-	"UPDATE_USER" VARCHAR2(20)
+	"UPDATE_USER" VARCHAR2(20), 
+	"ROLE_ID" NUMBER(10,0)
    ) ;
 --------------------------------------------------------
 --  DDL for Table USER_ROLE
@@ -116,7 +135,6 @@ Insert into CONTACT_DETAILS (CONTACT_ID,USER_ID,ADDRESS_1,ADDRESS_2,CITY,STATE,C
 REM INSERTING into ORDERS
 SET DEFINE OFF;
 Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (142,2,null,null,null,null,null,null,null,null,null,null,null);
-Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (85,1,null,null,null,null,null,null,null,null,null,null,null);
 Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (88,1,null,null,null,null,null,null,null,null,null,null,null);
 Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (44,2,null,null,null,null,null,null,null,null,null,null,null);
 Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (90,2,null,null,null,null,null,null,null,null,null,null,null);
@@ -131,8 +149,6 @@ Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL
 Insert into ORDERS (ORDER_ID,USER_ID,TOTAL,ORDER_DATE,PAID_FLAG,PAID_DATE,CANCEL_FLAG,CANCEL_DATE,REVERSED_FLAG,REVERSAL_DATE,DELIVERED_FLAG,DELIVERY_DATE,ORDER_STATUS) values (141,2,null,null,null,null,null,null,null,null,null,null,null);
 REM INSERTING into ORDERS_DETAILS
 SET DEFINE OFF;
-Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (86,85,2,1,65000);
-Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (87,85,3,3,195000);
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (89,88,1,1,43000);
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (91,90,2,1,65000);
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (143,142,1,1,43000);
@@ -157,6 +173,14 @@ Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (104,103,2,1,65000);
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (122,121,2,3,195000);
 Insert into ORDERS_DETAILS (ORDER_DETAILS_ID,ORDER_ID,PRODUCT_ID,QUANTITY,AMOUNT) values (144,141,1,1,43000);
+REM INSERTING into PERMISSIONS
+SET DEFINE OFF;
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (1,'VIEW_PRODUCT','VIEW_PRODUCT','A');
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (2,'VIEW_ORDER','VIEW_ORDER','A');
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (3,'CREATE_ORDER','CREATE_ORDER','A');
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (4,'VIEW_PROFILE','VIEW_PROFILE','A');
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (5,'UPDATE_PROFILE','UPDATE_PROFILE','A');
+Insert into PERMISSIONS (PERMISSION_ID,PERMISSION_NAME,PERMISSION_DESCRIPTION,STATUS) values (6,'DELETE_ORDER','DELETE_ORDER','A');
 REM INSERTING into PRODUCTS
 SET DEFINE OFF;
 Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,PRICE,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,MANUFACTURER,LAUNCH_DATE,PRODUCT_CODE) values (1,'One','Smart Phone',43000,to_date('17-OCT-17','DD-MON-RR'),'user1',to_date('17-OCT-17','DD-MON-RR'),'user1','HTC',to_date('01-OCT-16','DD-MON-RR'),'HTC201610');
@@ -165,17 +189,28 @@ Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,PRICE,CREATE_DATE,CREA
 Insert into PRODUCTS (PRODUCT_ID,PRODUCT_NAME,DESCRIPTION,PRICE,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,MANUFACTURER,LAUNCH_DATE,PRODUCT_CODE) values (4,'Nexus 9','Smart Phone',45000,to_date('17-OCT-17','DD-MON-RR'),'ADMIN',to_date('17-OCT-17','DD-MON-RR'),'ADMIN','Google',to_date('01-JUL-17','DD-MON-RR'),'GGL201707');
 REM INSERTING into ROLES
 SET DEFINE OFF;
-Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (1,'ROLE_USER','Full Access to own data','A');
-Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (2,'ROLE_ADMIN','Full Access','A');
+Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (2,'ROLE_USER','Full Access to own data','A');
+Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (1,'ROLE_ADMIN','Full Access','A');
 Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (3,'ROLE_VIEW','View Access','A');
+REM INSERTING into ROLE_PERMISSION
+SET DEFINE OFF;
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,2);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,4);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,2);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,4);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,3);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,4);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,5);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,2);
 REM INSERTING into USERS
 SET DEFINE OFF;
-Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (1,'AARON','asd','Aaron',null,'John',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,null);
-Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (2,'JOHN','Abcdef456','John','X','Mathews',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,null);
+Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (1,'AARON','asd','Aaron',null,'John',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,null,2);
+Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (2,'JOHN','Abcdef456','John','X','Mathews',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,null,1);
 REM INSERTING into USER_ROLE
 SET DEFINE OFF;
-Insert into USER_ROLE (USER_ID,ROLE_ID) values (1,1);
-Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
 --------------------------------------------------------
 --  DDL for Index PK_CONTACT_DETAILS
 --------------------------------------------------------
@@ -195,6 +230,12 @@ Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
   CREATE UNIQUE INDEX "PK_ORDERS_DETAILS" ON "ORDERS_DETAILS" ("ORDER_DETAILS_ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index PK_PERMISIONS
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_PERMISIONS" ON "PERMISSIONS" ("PERMISSION_ID") 
+  ;
+--------------------------------------------------------
 --  DDL for Index PK_PRODUCTS
 --------------------------------------------------------
 
@@ -205,6 +246,12 @@ Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
 --------------------------------------------------------
 
   CREATE UNIQUE INDEX "PK_ROLES" ON "ROLES" ("ROLE_ID") 
+  ;
+--------------------------------------------------------
+--  DDL for Index PK_ROLE_PERMISSION
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_ROLE_PERMISSION" ON "ROLE_PERMISSION" ("ROLE_ID", "PERMISSION_ID") 
   ;
 --------------------------------------------------------
 --  DDL for Index PK_USERS
@@ -234,6 +281,11 @@ Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
 
   ALTER TABLE "ORDERS_DETAILS" ADD CONSTRAINT "PK_ORDERS_DETAILS" PRIMARY KEY ("ORDER_DETAILS_ID") ENABLE;
 --------------------------------------------------------
+--  Constraints for Table PERMISSIONS
+--------------------------------------------------------
+
+  ALTER TABLE "PERMISSIONS" ADD CONSTRAINT "PK_PERMISIONS" PRIMARY KEY ("PERMISSION_ID") ENABLE;
+--------------------------------------------------------
 --  Constraints for Table PRODUCTS
 --------------------------------------------------------
 
@@ -243,6 +295,11 @@ Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
 --------------------------------------------------------
 
   ALTER TABLE "ROLES" ADD CONSTRAINT "PK_ROLES" PRIMARY KEY ("ROLE_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ROLE_PERMISSION
+--------------------------------------------------------
+
+  ALTER TABLE "ROLE_PERMISSION" ADD CONSTRAINT "PK_ROLE_PERMISSION" PRIMARY KEY ("ROLE_ID", "PERMISSION_ID") ENABLE;
 --------------------------------------------------------
 --  Constraints for Table USERS
 --------------------------------------------------------
@@ -273,6 +330,20 @@ Insert into USER_ROLE (USER_ID,ROLE_ID) values (2,2);
 	  REFERENCES "ORDERS" ("ORDER_ID") ENABLE;
   ALTER TABLE "ORDERS_DETAILS" ADD CONSTRAINT "FK_ORDER_DETAILS2" FOREIGN KEY ("PRODUCT_ID")
 	  REFERENCES "PRODUCTS" ("PRODUCT_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ROLE_PERMISSION
+--------------------------------------------------------
+
+  ALTER TABLE "ROLE_PERMISSION" ADD CONSTRAINT "FK_ROLE_PERMISSION1" FOREIGN KEY ("ROLE_ID")
+	  REFERENCES "ROLES" ("ROLE_ID") ENABLE;
+  ALTER TABLE "ROLE_PERMISSION" ADD CONSTRAINT "FK_ROLE_PERMISSION2" FOREIGN KEY ("PERMISSION_ID")
+	  REFERENCES "PERMISSIONS" ("PERMISSION_ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table USERS
+--------------------------------------------------------
+
+  ALTER TABLE "USERS" ADD CONSTRAINT "FK_USERS1" FOREIGN KEY ("ROLE_ID")
+	  REFERENCES "ROLES" ("ROLE_ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table USER_ROLE
 --------------------------------------------------------

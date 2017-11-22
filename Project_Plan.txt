@@ -1,0 +1,9 @@
+Functions
+-----------
+1. Add permission to access control. Currently only Roles are implemented. This is activated on the URLS
+2. Add File Upload
+
+
+Technology
+-----------
+1. 

@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.jm.shoppingcart.services.UserService;
+import com.jm.shoppingcart.entities.Permission;
 import com.jm.shoppingcart.entities.Role;
 import com.jm.shoppingcart.entities.User;
 
@@ -28,6 +29,46 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	public void setUserService(UserService userService){
 		this.userService=userService;
+	}
+
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
+
+		System.out.println("in authenticate: " +authentication);
+		System.out.println("Logged in Principal: " +authentication.getPrincipal());
+		System.out.println("Logged in Credential: " +authentication.getCredentials());
+
+		if(!authentication.isAuthenticated()) {						
+
+			String loginId = authentication.getName().trim();
+			System.out.println("loginId: "+loginId);
+
+			String password = (String)authentication.getCredentials();
+			System.out.println("password: "+password);			
+
+			User user = userService.getUserbyLoginId(loginId);
+
+			if (user == null ) {
+				System.out.println("BAD USER: ");
+				throw new BadCredentialsException("Invalid username or Password");				
+			}else if(!password.equals(user.getPassword())) {
+				System.out.println("INCORRECT PASSWORD ");
+				throw new BadCredentialsException("Invalid username or Password" );		   	 
+			}			
+			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+			int roleId = user.getRole().getRoleId();
+			//System.out.println("ROLE ID: "+roleId);
+			//System.out.println("PERMISSIONS: "+user.getRole().getPermissions());			
+
+			for(Permission permission:user.getRole().getPermissions()){
+				System.out.println("Permissions: "+permission.getPermissionName());
+				grantedAuths.add(new SimpleGrantedAuthority(permission.getPermissionName()));
+			}
+			
+			
+			authentication = new UsernamePasswordAuthenticationToken(user, password ,grantedAuths);			
+		}
+		return authentication;
+
 	}
 
 	public Authentication authenticate1(Authentication authentication) throws AuthenticationException {		
@@ -75,41 +116,7 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 	}
 
 
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {		
 
-		System.out.println("in authenticate: " +authentication);
-		System.out.println("Logged in Principal: " +authentication.getPrincipal());
-		System.out.println("Logged in Credential: " +authentication.getCredentials());
-
-		if(!authentication.isAuthenticated()) {						
-
-			String loginId = authentication.getName().trim();
-			System.out.println("loginId: "+loginId);
-
-			String password = (String)authentication.getCredentials();
-			System.out.println("password: "+password);			
-
-			User user = userService.getUserbyLoginId(loginId);
-			
-			if (user == null ) {
-				System.out.println("BAD USER: ");
-				throw new BadCredentialsException("Invalid username or Password");				
-			}else if(!password.equals(user.getPassword())) {
-				System.out.println("INCORRECT PASSWORD ");
-				throw new BadCredentialsException("Invalid username or Password" );		   	 
-			}			
-			List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();			
-			for(Role role:user.getRoles()){
-				grantedAuths.add(new SimpleGrantedAuthority(role.getRoleName()));	
-			}
-			
-			
-
-			authentication = new UsernamePasswordAuthenticationToken(user, password ,grantedAuths);			
-		}
-		return authentication;
-
-	}
 
 
 	public boolean supports(Class<?> authentication) {

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +44,7 @@ public class OrderController {
 
 	
 	@RequestMapping(value={"/secure/createOrder/{loginId}"}, method=RequestMethod.POST)
-
+	@PreAuthorize("hasPermission(#loginId,'CREATE_ORDER')")
 	public ResponseEntity<Integer> createOrder(@PathVariable("loginId") String loginId, @RequestBody String orderRequest) {
 
 		System.out.println("User : "+loginId);		
@@ -79,7 +80,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value={"/secure/getOrders/{loginId}"}, method=RequestMethod.GET, produces="application/json")
-
+	@PreAuthorize("hasPermission(#order,'VIEW_ORDER')")
 	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId, Authentication authentication) {
 
 		System.out.println("IN REST1: "+authentication.getPrincipal());
@@ -96,7 +97,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value={"/secure/deleteOrder/{orderId}"}, method=RequestMethod.DELETE)
-
+	@PreAuthorize("hasPermission(#order,'DELETE_ORDER')")
 	public ResponseEntity<Integer> delete(@PathVariable("orderId") int orderId) {
 
 		return new ResponseEntity<Integer>(orderService.deleteOrder(orderService.getOrderbyId(orderId)),HttpStatus.OK);

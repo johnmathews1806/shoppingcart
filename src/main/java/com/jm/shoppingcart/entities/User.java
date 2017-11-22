@@ -12,8 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.OneToMany;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
@@ -36,14 +40,18 @@ public class User implements java.io.Serializable{
 	@Transient
 	private Collection<Order> orders;
 
+	@ManyToOne
+	@JoinColumn(name="ROLE_ID", nullable=false)
+	@JsonIgnore
+	private Role role;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = { javax.persistence.CascadeType.ALL })//(mappedBy="users")
+/*	@ManyToMany(fetch = FetchType.EAGER,cascade = { javax.persistence.CascadeType.ALL })//(mappedBy="users")
 	@JoinTable(
 	        name = "user_role", 
 	        joinColumns = { @JoinColumn(name = "user_id") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "role_id") }
 	    )
-	private Set<Role> roles = new HashSet<Role>();
+	private Set<Role> roles = new HashSet<Role>();*/
 	
 	@Column(name = "LOGIN_ID")
 	private String loginId;
@@ -190,8 +198,8 @@ public class User implements java.io.Serializable{
 		return serialVersionUID;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Role getRole() {
+		return role;
 	}
 
 

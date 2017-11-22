@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class UserController {
 
 	
 	@RequestMapping(value={"/secure/getUser/{loginId}"}, method=RequestMethod.GET, produces="application/json")
-
+	@PreAuthorize("hasPermission(#user,'VIEW_PROFILE')")
 	public ResponseEntity<User> get(@PathVariable("loginId") String loginId) {
 
 		return new ResponseEntity<User>(userService.getUserbyLoginId(loginId),HttpStatus.OK);
@@ -41,7 +42,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value={"/secure/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
-
+	@PreAuthorize("hasPermission(#contactDetails,'VIEW_PROFILE')")
 	public ResponseEntity<List<ContactDetail>> getContactDetails(@PathVariable("loginId") String loginId) {
 
 		return new ResponseEntity<List<ContactDetail>>(userService.getContactDetailsbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
@@ -50,6 +51,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value={"/secure/updateContacts/{loginId}"}, method=RequestMethod.POST)
+	@PreAuthorize("hasPermission(#loginId,'UPDATE_PROFILE')")
 	public ResponseEntity<Integer> updateContacts(@PathVariable("loginId") String loginId, @RequestBody List<ContactDetail> contactDetails) {
 
 		System.out.println("User : "+loginId);		

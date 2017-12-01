@@ -27,8 +27,13 @@ angular.module('Profile')
 			}, 
 			function(response){
 				$scope.submitInProcess = false;
-				alert("failure"+response.status);
-				alert("failure"+response.statusText);
+				if(response.status=403){
+					//$scope.error = "You do not have rights to perform this action !";
+				   alert("You do not have rights to perform this action !");
+				}else{
+					$scope.error = "Host down or Network issue!";
+				}				
+				//alert("failure"+response.statusText);
 			}
 		);		
 

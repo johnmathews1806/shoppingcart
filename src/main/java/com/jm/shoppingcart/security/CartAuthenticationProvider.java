@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.jm.shoppingcart.services.UserService;
@@ -25,6 +26,9 @@ import com.jm.shoppingcart.entities.User;
 public class CartAuthenticationProvider implements AuthenticationProvider {
 
 	private UserService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void setUserService(UserService userService){
@@ -44,13 +48,15 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 
 			String password = (String)authentication.getCredentials();
 			System.out.println("password: "+password);			
+			System.out.println("encoded password: "+passwordEncoder.encode(password));
 
 			User user = userService.getUserbyLoginId(loginId);
 
 			if (user == null ) {
 				System.out.println("BAD USER: ");
 				throw new BadCredentialsException("Invalid username or Password");				
-			}else if(!password.equals(user.getPassword())) {
+			//}else if(!password.equals(user.getPassword())) {
+			}else if(!passwordEncoder.matches(password, user.getPassword())) {
 				System.out.println("INCORRECT PASSWORD ");
 				throw new BadCredentialsException("Invalid username or Password" );		   	 
 			}			
@@ -94,7 +100,8 @@ public class CartAuthenticationProvider implements AuthenticationProvider {
 			System.out.println("loginId: "+loginId);
 
 			String password = (String)authentication.getCredentials();
-			System.out.println("password: "+password);			
+			System.out.println("password: "+password);				
+			
 
 			User user = userService.getUserbyLoginId(loginId);
 			//System.out.println("user: "+user.getFirstName());

@@ -22,7 +22,7 @@ angular.module('Orders')
 	
 	$scope.deleteOrder = function(){		
 		//alert("order called"+$scope.orders);		
-		alert($scope.selectedOrder);				
+		//alert($scope.selectedOrder);				
 		$http.delete("http://localhost:9000/shoppingcart/secure/deleteOrder/"+$scope.selectedOrder)
 		//$http.delete("http://localhost:3000/orders/"+$scope.selectedOrder)
 		.then(function(response){
@@ -32,8 +32,13 @@ angular.module('Orders')
 			  	//alert("success"+response.statusText);
 			   }, 
 			   function(response){
-				   alert("failure"+response.status);
-				   alert("failure"+response.statusText);
+				   if(response.status=403){
+						//$scope.error = "You do not have rights to perform this action !";
+					   alert("You do not have rights to perform this action !");
+					}else{
+						$scope.error = "Host down or Network issue!";
+					}				   
+				   //alert("failure"+response.statusText);
 			   }
 		);		
 		

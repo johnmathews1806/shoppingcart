@@ -28,7 +28,9 @@
 		<intercept-url pattern="/products/**" access="permitAll" />
 		<intercept-url pattern="/orders/**" access="permitAll" />
 		<intercept-url pattern="/profile/**" access="permitAll" />
+		<intercept-url pattern="/register/**" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
+		
 		<!--<intercept-url pattern="/logout" access="permitAll" /> -->
 
 		<!-- <intercept-url pattern="/secure/getOrders/**" access="hasRole('ROLE_ADMIN')" 
@@ -88,6 +90,9 @@
 		class="com.jm.shoppingcart.security.CustomPermissionEvaluator"></b:bean>
 
 	<b:alias name="customPermissionEvaluator" alias="evaluator" />
+	
+	<b:bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></b:bean>
 
 </b:beans>
 

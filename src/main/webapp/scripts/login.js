@@ -13,6 +13,9 @@ angular.module('login',[
         templateUrl : 'login/login.html',
         controller : "loginCtrl"
     })
+    .when("/register", {
+        templateUrl : 'register/register.html'
+    })
     .when("/aboutUs", {
         templateUrl : 'aboutUs.html'
     })

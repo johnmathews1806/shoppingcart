@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jm.shoppingcart.beans.ContactList;
 import com.jm.shoppingcart.beans.OrderItem;
 import com.jm.shoppingcart.beans.OrderList;
+import com.jm.shoppingcart.beans.RegistrationDetails;
 import com.jm.shoppingcart.entities.ContactDetail;
 import com.jm.shoppingcart.entities.OrderDetail;
 import com.jm.shoppingcart.entities.User;
@@ -56,8 +57,8 @@ public class UserController {
 
 		System.out.println("User : "+loginId);		
 		System.out.println("contact details: "+contactDetails);
-		ObjectMapper mapper = new ObjectMapper();
-		/*List<ContactDetail> contactDetails = new ArrayList<ContactDetail>();		
+		/*ObjectMapper mapper = new ObjectMapper();
+		List<ContactDetail> contactDetails = new ArrayList<ContactDetail>();		
 		
 		try {
 			contactDetails = mapper.readValue(updateContactRequest, ContactList.class).getContactDetails();			
@@ -75,4 +76,30 @@ public class UserController {
 		return new ResponseEntity<Integer>(userService.updateContact(userService.getUserbyLoginId(loginId), contactDetails),HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value={"/register/"}, method=RequestMethod.POST)	
+	public ResponseEntity<Integer> register(@RequestBody RegistrationDetails registrationDetails) {				
+		System.out.println("registration details: "+registrationDetails);
+		User user = new User();
+		user.setLoginId(registrationDetails.getEmailId().toUpperCase());
+		user.setPassword(registrationDetails.getPassword());
+		user.setFirstName(registrationDetails.getFirstName());
+		user.setMiddleName(registrationDetails.getMiddleName());
+		user.setLastName(registrationDetails.getLastName());
+		user.setDob(registrationDetails.getDob());		
+		
+		ContactDetail contactDetail = new ContactDetail();
+		contactDetail.setAddress1(registrationDetails.getAddress1());
+		contactDetail.setAddress2(registrationDetails.getAddress2());
+		contactDetail.setCity(registrationDetails.getCity());
+		contactDetail.setState(registrationDetails.getState());
+		contactDetail.setCountry(registrationDetails.getCountry());
+		contactDetail.setEmailId(registrationDetails.getEmailId());
+		contactDetail.setPhone(registrationDetails.getPhone());
+		contactDetail.setMobile(registrationDetails.getMobile());
+		
+		return new ResponseEntity<Integer>(userService.createUser(user,contactDetail),HttpStatus.OK);
+
+	}
+
 }

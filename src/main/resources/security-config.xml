@@ -30,6 +30,7 @@
 		<intercept-url pattern="/profile/**" access="permitAll" />
 		<intercept-url pattern="/register/**" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/register" access="permitAll" />
 		
 		<!--<intercept-url pattern="/logout" access="permitAll" /> -->
 

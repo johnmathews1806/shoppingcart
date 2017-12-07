@@ -39,7 +39,7 @@ angular.module('Products')
 	    return result;
 	};
 	
-	$scope.order = function(){		
+	$scope.register = function(){		
 		//alert("cart: "+$scope.cart);
 		$scope.orderArray = [];		
 		angular.forEach($scope.cart, function(order){			

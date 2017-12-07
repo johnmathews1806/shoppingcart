@@ -3,20 +3,22 @@ angular.module('Orders')
 	
 	$scope.dataLoading = true;
 	//alert("started orders controller");
-	$http.get("http://localhost:9000/shoppingcart/secure/getOrders/"+$rootScope.globals.currentUser.userid)
+	$http.get("http://localhost:9000/shoppingcart/secure/getOrders/")	
 	//$http.get("http://localhost:3000/orders/?loginId="+$rootScope.globals.currentUser.userid)
 	.then(function (response) {
 		//alert("in orders");
 		//alert(JSON.stringify(response.data));
 		$scope.orders = response.data;
 		$scope.dataLoading = false;
-	},function(response) {    
+	},function(response) {
+		//alert(response.statusText);
+		
 		if(response.status=403){
 			$scope.error = "Access Denied";
 		}else{
 			$scope.error = "Host down or Network issue!";
 		}
-    	//alert($scope.error);    
+    	alert($scope.error);    
 		$scope.dataLoading = false;
 	});
 	

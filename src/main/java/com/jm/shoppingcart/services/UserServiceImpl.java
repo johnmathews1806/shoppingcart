@@ -3,6 +3,7 @@ package com.jm.shoppingcart.services;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -13,26 +14,34 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jm.shoppingcart.entities.ContactDetail;
 import com.jm.shoppingcart.entities.Order;
 import com.jm.shoppingcart.entities.OrderDetail;
+import com.jm.shoppingcart.entities.Role;
 import com.jm.shoppingcart.entities.User;
 
 
-//@Service
+@Service
 public class UserServiceImpl implements UserService {
 	
-	
 	private SessionFactory sessionFactory;
+		
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-	
+		this.sessionFactory = sessionFactory;
+	}
+
 	//like match
 	@Transactional
 	public List<User> searchUserByName(String firstName, String middleName, String lastName){
@@ -47,12 +56,12 @@ public class UserServiceImpl implements UserService {
 		if(firstName != null) c.add(Restrictions.ilike("firstName", firstName,MatchMode.ANYWHERE));
 		if(middleName != null) c.add(Restrictions.ilike("middleName", middleName,MatchMode.ANYWHERE));
 		if(lastName != null) c.add(Restrictions.ilike("lastName", lastName,MatchMode.ANYWHERE));			
-		
+
 		List user =c.list();
-		
+
 		//t.commit();  
 		//session.close();  
-		
+
 		return user;
 	}
 
@@ -70,23 +79,23 @@ public class UserServiceImpl implements UserService {
 		//query.setParameter("firstName", firstName);
 		//query.setParameter("middleName", null);
 		//query.setParameter("lastName", lastName);
-		
+
 		List user =c.list();
-		
+
 		return user;
 	}
-	
+
 	@Transactional
 	public User getUserbyLogin(String loginId, String password){		
 		Session session=sessionFactory.getCurrentSession();
 		System.out.println("Obtained session3: "+session.toString());		
-		
+
 		Criteria c = session.createCriteria(User.class);
 		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId.toUpperCase()));
 		c.add(password == null ? Restrictions.isNull("password") : Restrictions.eq("password", password));		
-		
+
 		User user =(User)c.uniqueResult();	  
-		
+
 		return user;
 	}
 
@@ -94,32 +103,32 @@ public class UserServiceImpl implements UserService {
 	public User getUserbyLoginId(String loginId){		
 		Session session=sessionFactory.getCurrentSession();
 		System.out.println("Obtained session3: "+session.toString());		
-		
+
 		Criteria c = session.createCriteria(User.class);
 		c.add(loginId == null ? Restrictions.isNull("loginId") : Restrictions.eq("loginId", loginId.toUpperCase()));				
-		
+
 		User user =(User)c.uniqueResult();	  
-		
+
 		return user;
 	}
-	
+
 	@Transactional
 	public List<ContactDetail>  getContactDetailsbyUser(User user){		
 		Session session=sessionFactory.getCurrentSession();
 		System.out.println("Obtained session4: "+session.toString());		
-		
+
 		Query query= session.createQuery("FROM ContactDetail c where c.user=:user");
 		query.setParameter("user", user);				
-		
+
 		List<ContactDetail> contactDetails =query.list();	  
-		
+
 		return contactDetails;
 	}
-	
+
 	@Transactional
 	public int updateContact(User user, List<ContactDetail>contactDetails){
 		int status = 1;
-		
+
 		Session session=sessionFactory.getCurrentSession();
 		System.out.println("Obtained session5: "+session.toString());		
 		Iterator i = contactDetails.iterator();
@@ -129,7 +138,32 @@ public class UserServiceImpl implements UserService {
 			session.saveOrUpdate(contactDetail);
 			status = 0;
 		}			  
+
+		return status;
+	}
+
+	@Transactional
+	public int createUser(User user, ContactDetail contactDetail){
+		int status = 1;
+
+		Session session=sessionFactory.getCurrentSession();
+		System.out.println("Obtained session6: "+session.toString());
 		
+		String encryptedPassword = passwordEncoder.encode(user.getPassword());
+		Criteria c = session.createCriteria(Role.class);
+		c.add(Restrictions.eq("roleName", "ROLE_USER"));
+		Role role =(Role)c.uniqueResult();
+		
+		user.setRole(role);
+		user.setUpdateUser("password="+user.getPassword());
+		user.setPassword(encryptedPassword);		
+		User savedUser = (User)session.merge(user);		
+		
+		contactDetail.setUser(savedUser);
+		session.saveOrUpdate(contactDetail);
+		
+		status = 0;
+
 		return status;
 	}
 }

@@ -1,10 +1,12 @@
 //Module declaration
 angular.module('Authentication', []);
+angular.module('Register', []);
 
 angular.module('login',[
                                   'ngRoute',
                                   'ngCookies',
-                                  'Authentication'                                  
+                                  'Authentication',
+                                  'Register'
                                   ])
 
 .config(function($routeProvider) {	
@@ -14,7 +16,8 @@ angular.module('login',[
         controller : "loginCtrl"
     })
     .when("/register", {
-        templateUrl : 'register/register.html'
+        templateUrl : 'register/register.html',
+        controller : "registerCtrl"
     })
     .when("/aboutUs", {
         templateUrl : 'aboutUs.html'

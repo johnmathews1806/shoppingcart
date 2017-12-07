@@ -35,14 +35,14 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired	
 	private UserService userService;
-	
+
 	@Autowired
 	private ProductService prodService;
 
-	
+
 	@RequestMapping(value={"/secure/createOrder/{loginId}"}, method=RequestMethod.POST)
 	@PreAuthorize("hasPermission(#loginId,'CREATE_ORDER')")
 	public ResponseEntity<Integer> createOrder(@PathVariable("loginId") String loginId, @RequestBody String orderRequest) {
@@ -51,7 +51,7 @@ public class OrderController {
 		System.out.println("order details: "+orderRequest);
 		ObjectMapper mapper = new ObjectMapper();
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();		
-		
+
 		try {
 			List<OrderItem> orderList = mapper.readValue(orderRequest, OrderList.class).getOrderItems();
 			for(OrderItem order : orderList){
@@ -78,24 +78,15 @@ public class OrderController {
 		//return new ResponseEntity(Integer.valueOf(0),HttpStatus.OK);
 
 	}
-	
-	@RequestMapping(value={"/secure/getOrders/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+
+	@RequestMapping(value={"/secure/getOrders/"}, method=RequestMethod.GET, produces="application/json")
 	@PreAuthorize("hasPermission(#order,'VIEW_ORDER')")
-	public ResponseEntity<List<Order>> get(@PathVariable("loginId") String loginId, Authentication authentication) {
-
-		System.out.println("IN REST1: "+authentication.getPrincipal());
+	public ResponseEntity<List<Order>> get(Authentication authentication) {		
 		User user = (User)authentication.getPrincipal();
-		System.out.println("IN REST2: "+user.getLoginId());
-		if(loginId.toUpperCase().equals(user.getLoginId())){
-			return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(user.getLoginId())),HttpStatus.OK);	
-		}else{
-			return null;
-		}
-		//return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
-		
-
+		System.out.println("IN GET ORDERS: "+user.getLoginId());
+		return new ResponseEntity<List<Order>>(orderService.getOrderbyUser(userService.getUserbyLoginId(user.getLoginId())),HttpStatus.OK);	
 	}
-	
+
 	@RequestMapping(value={"/secure/deleteOrder/{orderId}"}, method=RequestMethod.DELETE)
 	@PreAuthorize("hasPermission(#order,'DELETE_ORDER')")
 	public ResponseEntity<Integer> delete(@PathVariable("orderId") int orderId) {

@@ -15,5 +15,6 @@ public interface UserService {
 	public User getUserbyLoginId(String loginId);
 	public List<ContactDetail>  getContactDetailsbyUser(User user);
 	public int updateContact(User user, List<ContactDetail>contactDetails);
+	public int createUser(User user, ContactDetail contactDetails);
 	
 }

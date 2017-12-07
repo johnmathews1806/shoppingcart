@@ -41,7 +41,8 @@ public class User implements java.io.Serializable{
 	private Collection<Order> orders;
 
 	@ManyToOne
-	@JoinColumn(name="ROLE_ID", nullable=false)
+	//@JoinColumn(name="ROLE_ID", nullable=false)
+	@JoinColumn(name="ROLE_ID")
 	@JsonIgnore
 	private Role role;
 	
@@ -200,6 +201,10 @@ public class User implements java.io.Serializable{
 
 	public Role getRole() {
 		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 

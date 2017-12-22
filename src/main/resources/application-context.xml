@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
                    http://www.springframework.org/schema/beans/spring-beans.xsd
                    http://www.springframework.org/schema/context 
@@ -11,18 +9,21 @@
                    http://www.springframework.org/schema/tx
                    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<import resource="classpath:security-config.xml"/>
-	
+	<import resource="classpath:security-config.xml" />
+	<import resource="classpath:jms-config.xml" />
+
+
 	<context:annotation-config />
 	<context:component-scan base-package="com.jm.shoppingcart" />
-	
+
 	<context:property-placeholder location="classpath:shoppingcart.properties" />
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	<!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">-->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+			destroy-method="close"> -->
 		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />				
+		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
@@ -42,29 +43,26 @@
 				<value>com.jm.shoppingcart.entities.Permission</value>
 			</list>
 		</property>
-		<!--
-		<property name="configLocation">
-            <value>classpath:hibernate.cfg.xml</value>
-        </property>        
-         -->
+		<!-- <property name="configLocation"> <value>classpath:hibernate.cfg.xml</value> 
+			</property> -->
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>				
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
-		
+
 	</bean>
-	 
+
 	<bean id="userService" class="com.jm.shoppingcart.services.UserServiceImpl"></bean>
 	<bean id="productService" class="com.jm.shoppingcart.services.ProductServiceImpl"></bean>
 	<bean id="orderService" class="com.jm.shoppingcart.services.OrderServiceImpl"></bean>
-    
-    <tx:annotation-driven transaction-manager="transactionManager"/>    
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-	
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
 </beans>  

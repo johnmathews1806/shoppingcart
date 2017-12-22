@@ -10,9 +10,9 @@
 
 	<properties>
 		<!-- Spring -->
-		<spring-framework.version>4.3.2.RELEASE</spring-framework.version>
-		
-		<!-- Spring Security-->
+		<spring-framework.version>4.3.9.RELEASE</spring-framework.version>
+
+		<!-- Spring Security -->
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 
 		<!-- Hibernate -->
@@ -26,14 +26,14 @@
 
 		<!-- Commons DBCP -->
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		
+
 		<!-- Servlets -->
 		<servlet.version>2.5</servlet.version>
 
 	</properties>
 
 	<dependencies>
-		<!-- JAP -->
+		<!-- JPA -->
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>javax.persistence</artifactId>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${spring-framework.version}</version>
+			<version>${spring-framework.version}</version>			
 		</dependency>
 
 		<dependency>
@@ -74,6 +74,18 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>4.3.9.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring-framework.version}</version>
 		</dependency>
 
 		<!-- Hibernate -->
@@ -103,13 +115,20 @@
 			<artifactId>ojdbc</artifactId>
 			<version>${jdbc-oracle.version}</version>
 		</dependency>
-		
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet.version}</version>
-			<scope>provided</scope>			
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JMS/ActiveMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.15.2</version>
 		</dependency>
 
 		<!-- JUnit -->

@@ -21,6 +21,8 @@
 	<http entry-point-ref="restAuthenticationEntryPoint"
 		use-expressions="true">
 
+		<intercept-url pattern="/test.jsp" access="permitAll" />
+		
 		<intercept-url pattern="/index.html" access="permitAll" />
 		<intercept-url pattern="/app.html" access="permitAll" />
 		<intercept-url pattern="/scripts/**" access="permitAll" />

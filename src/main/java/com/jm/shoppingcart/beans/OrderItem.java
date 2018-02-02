@@ -1,6 +1,7 @@
 package com.jm.shoppingcart.beans;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class OrderItem {
 
@@ -41,6 +42,7 @@ public class OrderItem {
 	}
 
 	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
+		this.amount = amount;		
 	}
+	
 }

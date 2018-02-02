@@ -127,6 +127,19 @@
    (	"USER_ID" NUMBER(10,0), 
 	"ROLE_ID" NUMBER(10,0)
    ) ;
+--------------------------------------------------------
+--  DDL for Table WS_COUNTRIES
+--------------------------------------------------------
+
+  CREATE TABLE "WS_COUNTRIES" 
+   (	"COUNTRY_ID" NUMBER(10,0), 
+	"COUNTRY_CODE" VARCHAR2(20), 
+	"COUNTRY_NAME" VARCHAR2(50), 
+	"CREATE_DATE" DATE, 
+	"CREATE_USER" VARCHAR2(20), 
+	"UPDATE_DATE" DATE, 
+	"UPDATE_USER" VARCHAR2(20)
+   ) ;
 REM INSERTING into CONTACT_DETAILS
 SET DEFINE OFF;
 Insert into CONTACT_DETAILS (CONTACT_ID,USER_ID,ADDRESS_1,ADDRESS_2,CITY,STATE,COUNTRY,EMAIL_ID,PHONE,MOBILE,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (5,1,'Global Axis EPIP','Whitefield','Bangalore','Karnataka','India','jm.john@gmail.com','80 49184562','80 49184562',to_date('16-OCT-17','DD-MON-RR'),'ADMIN',to_date('16-OCT-17','DD-MON-RR'),'ADMIN');
@@ -194,26 +207,32 @@ Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (1,'ROLE_AD
 Insert into ROLES (ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,STATUS) values (3,'ROLE_VIEW','View Access','A');
 REM INSERTING into ROLE_PERMISSION
 SET DEFINE OFF;
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,1);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,2);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,4);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,1);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,2);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,4);
 Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,2);
 Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,3);
 Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,4);
 Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,5);
-Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,2);
 Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (1,6);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,2);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (2,4);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,1);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,2);
+Insert into ROLE_PERMISSION (ROLE_ID,PERMISSION_ID) values (3,4);
 REM INSERTING into USERS
 SET DEFINE OFF;
 Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (1,'AARON','$2a$10$EYIBDlHlvbxxScwVrJL23O09iN0daqgUvhP0RASMzqQnMqJTQUpwq','Aaron',null,'John',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,'password=asd',2);
 Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (2,'JOHN','$2a$10$d4KAM1XqFPjq7sEwvANz5ubDdSuaLVrEBZzJG7UKBehp1i7FsOKkG','John','X','Mathews',to_date('17-OCT-17','DD-MON-RR'),to_date('17-OCT-17','DD-MON-RR'),null,null,'password=Abcdef456',1);
 Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (192,'JM.JOHN@GMAIL.COM','$2a$10$UC4Xw48PSOw/dFhWNTZQL.PzSc0KD05ntYRhp6G8T4jxjYQ5EwHkS','John',null,'Mathews',to_date('12-DEC-17','DD-MON-RR'),null,null,null,'password=abcd',1);
 Insert into USERS (USER_ID,LOGIN_ID,PASSWORD,FIRST_NAME,MIDDLE_NAME,LAST_NAME,DOB,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,ROLE_ID) values (194,'DODO','$2a$10$9A855Kl50VrjIW3YiT6FK.wLg5xOJWf.sn7r5/Yy5D./dw6DBWyKi','sdfkj','sdklfj','sdklfj',to_date('12-DEC-17','DD-MON-RR'),null,null,null,'password=abcd',2);
-REM INSERTING into USER_ROLE 
+REM INSERTING into USER_ROLE
 SET DEFINE OFF;
+REM INSERTING into WS_COUNTRIES
+SET DEFINE OFF;
+Insert into WS_COUNTRIES (COUNTRY_ID,COUNTRY_CODE,COUNTRY_NAME,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (1,'IND','INDIA',to_date('04-JAN-18','DD-MON-RR'),'ADMIN',to_date('11-JAN-18','DD-MON-RR'),'ADMIN');
+Insert into WS_COUNTRIES (COUNTRY_ID,COUNTRY_CODE,COUNTRY_NAME,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (2,'USA','UNITES STATES OF AMERICA',to_date('04-JAN-18','DD-MON-RR'),'ADMIN',to_date('11-JAN-18','DD-MON-RR'),'ADMIN');
+Insert into WS_COUNTRIES (COUNTRY_ID,COUNTRY_CODE,COUNTRY_NAME,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (3,'JPN','JAPAN',to_date('04-JAN-18','DD-MON-RR'),'ADMIN',to_date('11-JAN-18','DD-MON-RR'),'ADMIN');
+Insert into WS_COUNTRIES (COUNTRY_ID,COUNTRY_CODE,COUNTRY_NAME,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER) values (4,'INA','INDONESIA',to_date('04-JAN-18','DD-MON-RR'),'ADMIN',to_date('11-JAN-18','DD-MON-RR'),'ADMIN');
 --------------------------------------------------------
 --  DDL for Index PK_CONTACT_DETAILS
 --------------------------------------------------------
@@ -269,6 +288,12 @@ SET DEFINE OFF;
   CREATE UNIQUE INDEX "PK_USER_ROLE" ON "USER_ROLE" ("USER_ID", "ROLE_ID") 
   ;
 --------------------------------------------------------
+--  DDL for Index WS_COUNTRIES_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "WS_COUNTRIES_PK" ON "WS_COUNTRIES" ("COUNTRY_ID") 
+  ;
+--------------------------------------------------------
 --  Constraints for Table CONTACT_DETAILS
 --------------------------------------------------------
 
@@ -313,6 +338,14 @@ SET DEFINE OFF;
 --------------------------------------------------------
 
   ALTER TABLE "USER_ROLE" ADD CONSTRAINT "PK_USER_ROLE" PRIMARY KEY ("USER_ID", "ROLE_ID") ENABLE;
+--------------------------------------------------------
+--  Constraints for Table WS_COUNTRIES
+--------------------------------------------------------
+
+  ALTER TABLE "WS_COUNTRIES" ADD CONSTRAINT "WS_COUNTRIES_PK" PRIMARY KEY ("COUNTRY_ID") ENABLE;
+  ALTER TABLE "WS_COUNTRIES" MODIFY ("COUNTRY_NAME" NOT NULL ENABLE);
+  ALTER TABLE "WS_COUNTRIES" MODIFY ("COUNTRY_CODE" NOT NULL ENABLE);
+  ALTER TABLE "WS_COUNTRIES" MODIFY ("COUNTRY_ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Ref Constraints for Table CONTACT_DETAILS
 --------------------------------------------------------

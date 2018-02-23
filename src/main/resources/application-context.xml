@@ -10,7 +10,7 @@
                    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<import resource="classpath:security-config.xml" />
-	<!-- <import resource="classpath:jms-config.xml" /> -->
+	<import resource="classpath:jms-config.xml" /> 
 
 
 	<context:annotation-config />

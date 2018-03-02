@@ -26,6 +26,6 @@
 		</property>
 		<property name="defaultDestinationName" value="SHOPPINGCART.MESSAGES.RSP">
 		</property>
-	</bean> 
+	</bean>	
 
 </beans>

@@ -8,6 +8,7 @@ import javax.xml.ws.WebServiceRef;
 import javax.xml.ws.Service;
 
 import com.jm.utilityservices.webservices.Country;
+import com.jm.utilityservices.webservices.CountryService;
 import com.jm.utilityservices.webservices.Hello;
 import com.jm.utilityservices.webservices.HelloService;
 
@@ -39,6 +40,10 @@ public class TestClient {
 		Service serviceCountry = Service.create(urlCountry, qnameCountry);
 		Country country = serviceCountry.getPort(Country.class);  
         System.out.println(country.getCountries());		
+        
+        CountryService cs = new CountryService();
+        Country c = cs.getCountryPort();
+        System.out.println("from webservice: "+c.getCountries());
 
 	}
 

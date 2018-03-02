@@ -7,7 +7,7 @@ angular.module('Profile')
 	.then(function (response) {
 		//alert("in profile");
 		//alert(response.data);
-		$scope.contactDetails = response.data;
+		$scope.formDetails = response.data;		 
 		$scope.dataLoading = false;
 	},function(response) {    		
 		$scope.error = "Host down or Network issue!";    		
@@ -17,9 +17,10 @@ angular.module('Profile')
 
 
 	$scope.updateContact = function(){				
-		//alert("contacts: "+JSON.stringify($scope.contactDetails));
+		//alert("in update...");
+		//alert("contacts: "+JSON.stringify($scope.formDetails.contactDetails));
 		$scope.submitInProcess = true;
-		$http.post("http://localhost:9000/shoppingcart/secure/updateContacts/"+$rootScope.globals.currentUser.userid, $scope.contactDetails)
+		$http.post("http://localhost:9000/shoppingcart/secure/updateContacts/"+$rootScope.globals.currentUser.userid, $scope.formDetails.contactDetails)
 			.then(function(response){
 				$scope.submitInProcess = false;
 				//alert("success"+response.status);

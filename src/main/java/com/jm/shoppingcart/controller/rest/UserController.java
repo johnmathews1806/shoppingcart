@@ -21,11 +21,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jm.shoppingcart.beans.ContactList;
 import com.jm.shoppingcart.beans.OrderItem;
 import com.jm.shoppingcart.beans.OrderList;
+import com.jm.shoppingcart.beans.ProfileForm;
 import com.jm.shoppingcart.beans.RegistrationDetails;
 import com.jm.shoppingcart.entities.ContactDetail;
 import com.jm.shoppingcart.entities.OrderDetail;
 import com.jm.shoppingcart.entities.User;
 import com.jm.shoppingcart.services.UserService;
+import com.jm.utilityservices.webservices.Country;
+import com.jm.utilityservices.webservices.CountryService;
 
 @RestController
 public class UserController {
@@ -42,11 +45,25 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value={"/secure/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+/*	@RequestMapping(value={"/secure/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
 	@PreAuthorize("hasPermission(#contactDetails,'VIEW_PROFILE')")
 	public ResponseEntity<List<ContactDetail>> getContactDetails(@PathVariable("loginId") String loginId) {
 
 		return new ResponseEntity<List<ContactDetail>>(userService.getContactDetailsbyUser(userService.getUserbyLoginId(loginId)),HttpStatus.OK);
+
+	}*/
+	
+	@RequestMapping(value={"/secure/getContactDetails/{loginId}"}, method=RequestMethod.GET, produces="application/json")
+	@PreAuthorize("hasPermission(#contactDetails,'VIEW_PROFILE')")
+	public ResponseEntity<ProfileForm> getContactDetails(@PathVariable("loginId") String loginId) {
+		ProfileForm pf = new ProfileForm();
+		
+		CountryService cs = new CountryService();
+        Country c = cs.getCountryPort();
+        System.out.println("from webservice: "+c.getCountries());
+		pf.setCountries(c.getCountries());
+		pf.setContactDetails(userService.getContactDetailsbyUser(userService.getUserbyLoginId(loginId)));
+		return new ResponseEntity<ProfileForm>(pf,HttpStatus.OK);
 
 	}
 	

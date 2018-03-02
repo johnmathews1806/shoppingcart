@@ -39,6 +39,10 @@ public class User implements java.io.Serializable{
 	@OneToMany(mappedBy="user")
 	@Transient
 	private Collection<Order> orders;
+	
+	@OneToMany(mappedBy="user")
+	@Transient
+	private Collection<AccountTransaction> transactions;
 
 	@ManyToOne
 	//@JoinColumn(name="ROLE_ID", nullable=false)

@@ -1,5 +1,6 @@
 package com.jm.shoppingcart;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.hibernate.*;  
 import org.hibernate.cfg.*;
@@ -34,7 +38,29 @@ public class Tester {
 
 	public static void main(String[] args){
 		System.out.println("In Main");
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		//ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+
+		com.jm.shoppingcart.jms.jaxb.TransactionBinding tran = new com.jm.shoppingcart.jms.jaxb.TransactionBinding();
+		tran.setAmount("123123");
+		tran.setReferenceNo("HJI89789789");
+		tran.setTranDate("12-12-2017");
+		tran.setUserId("2");
+				
+		try {
+			JAXBContext jaxbcontext = JAXBContext.newInstance(com.jm.shoppingcart.jms.jaxb.TransactionBinding.class);
+			Marshaller m = jaxbcontext.createMarshaller();
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			// Write to System.out
+			m.marshal(tran, System.out);
+
+			// Write to File
+			m.marshal(tran, new File("D://transaction.xml"));
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		//When Using hibernate without Spring
 		/*		//SessionFactory factory=new Configuration().configure().buildSessionFactory();  
 		//Session session=factory.openSession();  
@@ -42,22 +68,22 @@ public class Tester {
 		 Session session=new AnnotationConfiguration()  
 		       .configure().buildSessionFactory().openSession();
 		 */		
-		UserService userService = context.getBean(UserService.class);
+		//UserService userService = context.getBean(UserService.class);
 		//UserService service = new UserService();
-		ProductService prodService = context.getBean(ProductService.class);
-		OrderService orderService = context.getBean(OrderService.class);
+		//ProductService prodService = context.getBean(ProductService.class);
+		//OrderService orderService = context.getBean(OrderService.class);
 
 		Tester tester = new Tester();
 		/*		Iterator i = prodService.getProducts().iterator();
 		while(i.hasNext()){
 			System.out.println(((Product)i.next()).getProductCode());			
 		}*/
-		
-/*		Calendar cal = Calendar.getInstance();
+
+		/*		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DATE, -1);
 		System.out.println(cal.getTime());*/
-		
-		tester.insertData(userService,prodService,orderService);
+
+		//tester.insertData(userService,prodService,orderService);
 
 		/*		System.out.println("Invoking service..");
 		System.out.println("User details: "+userService.getUserbyLogin("jmjohn", "asdfsadf"));
@@ -148,7 +174,7 @@ public class Tester {
 			//}		    	
 		}*/
 
-		
+
 		orderService.deleteOrder(orderService.getOrderbyId(29));
 
 		/*Product prod1 = prodService.getProducts().get(0);

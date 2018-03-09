@@ -1,5 +1,5 @@
 
-package com.jm.utilityservices.webservices;
+package com.jm.cms.webservices;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,20 +17,20 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "CountryService", targetNamespace = "http://webservices.utilityservices.jm.com/", wsdlLocation = "http://localhost:7001/utilityservices/country?wsdl")
+@WebServiceClient(name = "CountryService", targetNamespace = "http://webservices.cms.jm.com/", wsdlLocation = "http://localhost:7001/cmsadministrator/country?wsdl")
 public class CountryService
     extends Service
 {
 
     private final static URL COUNTRYSERVICE_WSDL_LOCATION;
     private final static WebServiceException COUNTRYSERVICE_EXCEPTION;
-    private final static QName COUNTRYSERVICE_QNAME = new QName("http://webservices.utilityservices.jm.com/", "CountryService");
+    private final static QName COUNTRYSERVICE_QNAME = new QName("http://webservices.cms.jm.com/", "CountryService");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:7001/utilityservices/country?wsdl");
+            url = new URL("http://localhost:7001/cmsadministrator/country?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -69,7 +69,7 @@ public class CountryService
      */
     @WebEndpoint(name = "CountryPort")
     public Country getCountryPort() {
-        return super.getPort(new QName("http://webservices.utilityservices.jm.com/", "CountryPort"), Country.class);
+        return super.getPort(new QName("http://webservices.cms.jm.com/", "CountryPort"), Country.class);
     }
 
     /**
@@ -81,7 +81,7 @@ public class CountryService
      */
     @WebEndpoint(name = "CountryPort")
     public Country getCountryPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://webservices.utilityservices.jm.com/", "CountryPort"), Country.class, features);
+        return super.getPort(new QName("http://webservices.cms.jm.com/", "CountryPort"), Country.class, features);
     }
 
     private static URL __getWsdlLocation() {

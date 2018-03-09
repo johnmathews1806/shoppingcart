@@ -1,5 +1,5 @@
 
-package com.jm.utilityservices.webservices;
+package com.jm.cms.webservices;
 
 import java.util.List;
 import javax.jws.WebMethod;
@@ -16,7 +16,7 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "Country", targetNamespace = "http://webservices.utilityservices.jm.com/")
+@WebService(name = "Country", targetNamespace = "http://webservices.cms.jm.com/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
@@ -30,8 +30,8 @@ public interface Country {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCountries", targetNamespace = "http://webservices.utilityservices.jm.com/", className = "com.jm.utilityservices.webservices.GetCountries")
-    @ResponseWrapper(localName = "getCountriesResponse", targetNamespace = "http://webservices.utilityservices.jm.com/", className = "com.jm.utilityservices.webservices.GetCountriesResponse")
+    @RequestWrapper(localName = "getCountries", targetNamespace = "http://webservices.cms.jm.com/", className = "com.jm.cms.webservices.GetCountries")
+    @ResponseWrapper(localName = "getCountriesResponse", targetNamespace = "http://webservices.cms.jm.com/", className = "com.jm.cms.webservices.GetCountriesResponse")
     public List<String> getCountries();
 
 }

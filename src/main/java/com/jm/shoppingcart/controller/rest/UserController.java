@@ -27,8 +27,8 @@ import com.jm.shoppingcart.entities.ContactDetail;
 import com.jm.shoppingcart.entities.OrderDetail;
 import com.jm.shoppingcart.entities.User;
 import com.jm.shoppingcart.services.UserService;
-import com.jm.utilityservices.webservices.Country;
-import com.jm.utilityservices.webservices.CountryService;
+import com.jm.cms.webservices.Country;
+import com.jm.cms.webservices.CountryService;
 
 @RestController
 public class UserController {

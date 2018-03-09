@@ -1,5 +1,5 @@
 
-package com.jm.utilityservices.webservices;
+package com.jm.cms.webservices;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

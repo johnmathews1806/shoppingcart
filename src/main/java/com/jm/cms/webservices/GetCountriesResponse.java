@@ -1,5 +1,5 @@
 
-package com.jm.utilityservices.webservices;
+package com.jm.cms.webservices;
 
 import java.util.ArrayList;
 import java.util.List;

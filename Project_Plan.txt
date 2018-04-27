@@ -1,9 +1,29 @@
 Functions
 -----------
-1. Add permission to access control. Currently only Roles are implemented. This is activated on the URLS
+1. Add permission to access control. Currently only Roles are implemented. This is activated on the URLS  - done
 2. Add File Upload
 
 
 Technology
 -----------
-1. 
+1. JMS - done
+
+
+Application design
+============================
+Shopping cart
+---------------------
+1. Home
+2. Products - Some mechanism to be developed to sync products in CMS and cart.
+2. Orders - Transaction should be stored locally and sent to CMS through JMS. Order status to conveyed back in response.
+3. Address update - should be store locally.
+4. Registration - Capture registration data and send to CMS, which will create local account in app.
+
+Cart Management System (CMS)
+---------------------
+1. Should have file upload for products with latest rates.
+2. Should have browser for transactions
+3. Should have a browser for user and account details.
+4. Should have maker/checker
+
+ 
